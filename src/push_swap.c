@@ -6,11 +6,16 @@
 /*   By: flauer <flauer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 11:55:50 by flauer            #+#    #+#             */
-/*   Updated: 2023/04/21 15:34:38 by flauer           ###   ########.fr       */
+/*   Updated: 2023/04/21 16:33:54 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+bool	init_stack()
+{
+	
+}
 
 int	main(int argc, char **argv)
 {
