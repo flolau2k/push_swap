@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 11:55:50 by flauer            #+#    #+#             */
-/*   Updated: 2023/04/21 14:37:42 by flauer           ###   ########.fr       */
+/*   Updated: 2023/04/21 15:34:38 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,10 @@
 
 int	main(int argc, char **argv)
 {
-	if (argc < 2)
-		return (0);
-	ft_printf("more than 2 arguments! Argument 1 is %s\n", argv[1]);
+	int	i;
+
+	i = -1;
+	while (++i < argc)
+		ft_printf("Argument %d is %s\n", i, argv[i]);
 	return(0);
 }
