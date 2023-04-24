@@ -6,23 +6,24 @@
 /*   By: flauer <flauer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 11:55:50 by flauer            #+#    #+#             */
-/*   Updated: 2023/04/21 16:33:54 by flauer           ###   ########.fr       */
+/*   Updated: 2023/04/24 15:24:49 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-bool	init_stack()
+bool	init_stack(t_list a, int argc, char *argv[])
 {
 	
 }
 
-int	main(int argc, char **argv)
+int	main(int argc, char *argv[])
 {
-	int	i;
+	t_list	a;
+	t_list	b;
 
-	i = -1;
-	while (++i < argc)
-		ft_printf("Argument %d is %s\n", i, argv[i]);
+	if (argc < 2)
+		return (write(2, "Error\n", 6));
+	
 	return(0);
 }
