@@ -6,7 +6,7 @@
 #    By: flauer <flauer@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/21 11:55:35 by flauer            #+#    #+#              #
-#    Updated: 2023/04/21 14:55:27 by flauer           ###   ########.fr        #
+#    Updated: 2023/04/27 09:59:08 by flauer           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ LIBFT = $(LIBFT_DIR)/libft.a
 OBJDIR = obj/
 SRCDIR = src/
 
-SRCS = push_swap.c
+SRCS = push_swap.c, helper.c
 OBJS = $(SRCS:%.c=%.o)
 
 SRC = $(addprefix $(SRCDIR), $(SRCS))

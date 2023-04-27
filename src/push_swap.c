@@ -6,69 +6,52 @@
 /*   By: flauer <flauer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 11:55:50 by flauer            #+#    #+#             */
-/*   Updated: 2023/04/25 11:40:03 by flauer           ###   ########.fr       */
+/*   Updated: 2023/04/27 09:59:21 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-bool	check_dup(t_list **a, int *num)
+bool	init_stack(int argc, char *args[], t_state *st)
 {
-	t_list	*item;
-	
-	item = *a;
-	while (item)
+	int	i;
+	int	*curr_val;
+
+	i = 0;
+	while (i < argc)
 	{
-		if (*(int*)item->content == *num)
-			return (true);
-		item = item -> next;
+		curr_val = malloc(sizeof(*curr_val));
+		if (!curr_val)
+			return (false);
+		*curr_val = ft_atoi(args[i]);
+		ft_lstadd_back(&st->a, ft_lstnew(curr_val));
+		++i;
 	}
-	return (false);
+	return (true);
 }
 
-bool	init_stack(t_list **a, char **arg)
+bool	init(int argc, char *argv[], t_state *st)
 {
-	int		*num;
-	t_list	*new;
+	char	**args;
 
-	num = malloc(sizeof(*num));
-	*num = ft_atoi(*arg); // todo check for > INT_MAX or < INT_MIN
-	if (!check_dup(a, num))
+	if (argc < 2)
+		return (false);
+	else if (argc == 2)
 	{
-		new = ft_lstnew(num);
-		ft_lstadd_back(a, new);
+		args = ft_split(argv[1], ' ');
+		argc = ft_alen((const char **)args);
+		return (init_stack(argc, args, st));
 	}
 	else
-		return (false);
-	return (true);
-}
-
-bool	proc_input(int argc, char *argv[], t_list **a)
-{
-	int		i;
-	char	**args[argc];
-
-	i = 0;
-	while (++i < argc)
-		args[i - 1] = ft_split(argv[i], ' ');
-	args[i - 1] = NULL;
-	i = 0;
-	while (++i < argc)
-	{
-		if (!init_stack(a, args[i - 1]))
-			return (false);
-	}
-	return (true);
+		return (init_stack(argc, argv, st));
 }
 
 int	main(int argc, char *argv[])
 {
-	t_list	*a;
-	t_list	*b;
+	t_state	st;
 
-	b = ft_lstnew(NULL);
-	a = NULL;
-	proc_input(argc, argv, &a);
-	
+	if (!init(argc, argv, &st))
+		return (1);
+	ft_putlst(st.a);
 	return (0);
 }
