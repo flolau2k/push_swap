@@ -6,17 +6,18 @@
 /*   By: flauer <flauer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/27 09:58:49 by flauer            #+#    #+#             */
-/*   Updated: 2023/04/27 09:59:26 by flauer           ###   ########.fr       */
+/*   Updated: 2023/04/27 11:42:19 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include <stdio.h>
 
 void	ft_putelm(void	*content)
 {
+	static int	i;
 
-	printf("%d", *(int*)content);
+	ft_printf("element %i: %d\n", i, *(int *)content);
+	++i;
 }
 
 void	ft_putlst(t_list *lst)

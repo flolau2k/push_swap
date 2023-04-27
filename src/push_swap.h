@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 11:56:01 by flauer            #+#    #+#             */
-/*   Updated: 2023/04/27 10:00:19 by flauer           ###   ########.fr       */
+/*   Updated: 2023/04/27 11:42:51 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@
 
 typedef struct s_state
 {
-	t_list *a;
-	t_list *b;
+	t_list	*a;
+	t_list	*b;
 }	t_state;
 
 int		main(int argc, char **argv);

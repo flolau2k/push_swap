@@ -6,7 +6,7 @@
 #    By: flauer <flauer@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/21 11:55:35 by flauer            #+#    #+#              #
-#    Updated: 2023/04/27 09:59:08 by flauer           ###   ########.fr        #
+#    Updated: 2023/04/27 11:45:05 by flauer           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,23 +16,23 @@ CC = gcc
 CFLAGS = -g -Wall -Werror -Wextra
 
 LIBFT_DIR = libft
-LIBFT = $(LIBFT_DIR)/libft.a
 
 OBJDIR = obj/
 SRCDIR = src/
 
-SRCS = push_swap.c, helper.c
+SRCS = push_swap.c helper.c
 OBJS = $(SRCS:%.c=%.o)
 
 SRC = $(addprefix $(SRCDIR), $(SRCS))
 OBJ = $(addprefix $(OBJDIR), $(OBJS))
 
-.PHONY = all clean fclean re
+.PHONY = ft all clean fclean re 
 
-all: $(NAME)
+all: ft $(NAME)
 
-$(NAME): $(OBJ) $(LIBFT)
+$(NAME): $(OBJ)
 	gcc -o $(NAME) $(OBJ) -Llibft -lft
+	@echo "built $(NAME)"
 
 $(OBJDIR)%.o: $(SRCDIR)%.c
 	@mkdir -p $(@D)
@@ -48,5 +48,5 @@ fclean: clean
 
 re:	fclean all
 
-$(LIBFT):
-	make -C $(@D)
+ft:
+	@make -C $(LIBFT_DIR)

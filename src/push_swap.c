@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 11:55:50 by flauer            #+#    #+#             */
-/*   Updated: 2023/04/27 09:59:21 by flauer           ###   ########.fr       */
+/*   Updated: 2023/04/27 11:45:19 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,17 @@
 
 bool	init_stack(int argc, char *args[], t_state *st)
 {
-	int	i;
-	int	*curr_val;
+	int			i;
+	int			*curr_val;
+	static bool	check[UINT32_MAX];
 
 	i = 0;
 	while (i < argc)
 	{
-		curr_val = malloc(sizeof(*curr_val));
-		if (!curr_val)
+		curr_val = ft_atoi(args[i]);
+		if (!curr_val || check[(unsigned int) *curr_val])
 			return (false);
-		*curr_val = ft_atoi(args[i]);
+		check[(unsigned int) *curr_val] = true;
 		ft_lstadd_back(&st->a, ft_lstnew(curr_val));
 		++i;
 	}
@@ -43,7 +44,7 @@ bool	init(int argc, char *argv[], t_state *st)
 		return (init_stack(argc, args, st));
 	}
 	else
-		return (init_stack(argc, argv, st));
+		return (init_stack(argc - 1, argv + 1, st));
 }
 
 int	main(int argc, char *argv[])
@@ -51,7 +52,7 @@ int	main(int argc, char *argv[])
 	t_state	st;
 
 	if (!init(argc, argv, &st))
-		return (1);
+		return (write(1, "ERROR\n", 6));
 	ft_putlst(st.a);
 	return (0);
 }
