@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 11:55:50 by flauer            #+#    #+#             */
-/*   Updated: 2023/04/28 12:54:48 by flauer           ###   ########.fr       */
+/*   Updated: 2023/04/28 14:02:11 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,6 @@ int	main(int argc, char *argv[])
 	t_state	st;
 
 	if (!init(argc, argv, &st))
-		return (write(1, "ERROR\n", 6));
-	ft_putlst(st.a);
-	
+		return (write(1, "Error\n", 6));
 	return (0);
 }
