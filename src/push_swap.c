@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 11:55:50 by flauer            #+#    #+#             */
-/*   Updated: 2023/04/28 12:00:41 by flauer           ###   ########.fr       */
+/*   Updated: 2023/04/28 12:54:48 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,12 @@ bool	init_stack(int argc, char *args[], t_state *st)
 		++i;
 	}
 	return (true);
+}
+
+void	free_stacks(t_state *st)
+{
+	ft_lstclear(&st->a, &clear_elm);
+	ft_lstclear(&st->b, &clear_elm);
 }
 
 bool	init(int argc, char *argv[], t_state *st)
@@ -54,5 +60,6 @@ int	main(int argc, char *argv[])
 	if (!init(argc, argv, &st))
 		return (write(1, "ERROR\n", 6));
 	ft_putlst(st.a);
+	
 	return (0);
 }
