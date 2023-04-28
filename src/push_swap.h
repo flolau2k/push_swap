@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 11:56:01 by flauer            #+#    #+#             */
-/*   Updated: 2023/04/28 13:47:38 by flauer           ###   ########.fr       */
+/*   Updated: 2023/04/28 14:05:14 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,5 +53,10 @@ void	ft_putlst(t_list *lst);
 int		ft_alen(const char **a);
 void	clear_elm(void *content);
 void	ft_putstate(t_state *st);
+
+// init.c
+bool	init_stack(int argc, char *args[], t_state *st);
+void	free_stacks(t_state *st);
+bool	init(int argc, char *argv[], t_state *st);
 
 #endif // PUSH_SWAP_H
