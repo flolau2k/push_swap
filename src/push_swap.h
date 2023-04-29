@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 11:56:01 by flauer            #+#    #+#             */
-/*   Updated: 2023/04/28 14:05:14 by flauer           ###   ########.fr       */
+/*   Updated: 2023/04/29 11:41:25 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,11 @@ void	ft_sa(t_state *st);
 void	ft_sb(t_state *st);
 void	ft_ss(t_state *st);
 
-// push_rot.c
+// push.c
 void	ft_pa(t_state *st);
 void	ft_pb(t_state *st);
+
+// rot.c
 void	ft_ra(t_state *st);
 void	ft_rb(t_state *st);
 void	ft_rr(t_state *st);

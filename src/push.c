@@ -35,31 +35,3 @@ void	ft_pb(t_state *st)
 	ft_lstadd_front(&st->b, temp);
 	ft_printf("pb\n");
 }
-
-void	ft_ra(t_state *st)
-{
-	t_list *temp;
-
-	temp = st->a;
-	st->a = temp->next;
-	temp->next = NULL;
-	ft_lstlast(st->a)->next = temp;
-	ft_printf("ra\n");
-}
-
-void	ft_rb(t_state *st)
-{
-	t_list *temp;
-
-	temp = st->b;
-	st->b = temp->next;
-	temp->next = NULL;
-	ft_lstlast(st->b)->next = temp;
-	ft_printf("rb\n");
-}
-
-void	ft_rr(t_state *st)
-{
-	ft_ra(st);
-	ft_rb(st);
-}

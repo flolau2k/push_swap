@@ -1,42 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.c                                        :+:      :+:    :+:   */
+/*   rot.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/21 11:55:50 by flauer            #+#    #+#             */
-/*   Updated: 2023/04/29 11:39:10 by flauer           ###   ########.fr       */
+/*   Created: 2023/04/29 11:19:17 by flauer            #+#    #+#             */
+/*   Updated: 2023/04/29 11:36:22 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	test_ops(t_state *st)
+static void	ft_rot(t_list **lst)
 {
-	ft_printf("start: \n");
-	ft_putstate(st);
-	ft_pb(st);
-	ft_putstate(st);
-	ft_pa(st);
-	ft_putstate(st);
-	ft_ra(st);
-	ft_putstate(st);
-	ft_pb(st);
-	ft_pb(st);
-	ft_putstate(st);
-	ft_rr(st);
-	ft_putstate(st);
-	ft_rrr(st);
-	ft_putstate(st);
+	t_list *temp;
+
+	temp = *lst;
+	*lst = temp->next;
+	temp->next = NULL;
+	ft_lstlast(*lst)->next = temp;
 }
 
-int	main(int argc, char *argv[])
+void	ft_ra(t_state *st)
 {
-	t_state	st;
+	ft_rot(&st->a);
+	ft_printf("ra\n");
+}
 
-	if (!init(argc, argv, &st))
-		return (write(1, "Error\n", 6));
-	test_ops(&st);
-	return (0);
+void	ft_rb(t_state *st)
+{
+	ft_rot(&st->b);
+	ft_printf("rb\n");
+}
+
+void	ft_rr(t_state *st)
+{
+	ft_rot(&st->a);
+	ft_rot(&st->b);
+	ft_printf("rr\n");
 }
