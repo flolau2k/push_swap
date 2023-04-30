@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 11:55:50 by flauer            #+#    #+#             */
-/*   Updated: 2023/04/30 19:02:50 by flauer           ###   ########.fr       */
+/*   Updated: 2023/05/01 00:07:50 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,7 @@ bool	ft_sorted(t_state *st)
 
 // TODO negative numbers!
 // Optimize ... 
+#include <stdio.h>
 void	ft_sort(t_state *st)
 {
 	t_sort	sort;
@@ -102,22 +103,64 @@ void	ft_sort(t_state *st)
 		sort.i = 0;
 		while(sort.i < sort.len)
 		{
-			if ((ft_cont(st->a) / sort.factor) % 2)
+			if (!((ft_cont(st->a) / sort.factor) % 2))
 			{
 				ft_pb(st);
-				ft_rb(st);
+				// ft_rb(st);
 			}
 			else
 				ft_ra(st);
 			++sort.i;
+			// ft_putstate(st);
+			// getchar();
 		}
 		while(st->b)
 		{
 			ft_pa(st);
-			ft_ra(st);
+			//ft_ra(st);
 		}
+		// ft_putstate(st);
+		// getchar();
 		sort.factor *= 2;
 	}
+}
+
+void	ft_sort3(t_state *st)
+{
+	while (!ft_sorted(st))
+	{
+		// ft_putstate(st);
+		// getchar();
+		if (ft_cont(st->a) > ft_cont(st->a->next) && ft_cont(st->a->next) > \
+			ft_cont(st->a->next->next))
+		{
+			ft_sa(st);
+			ft_rra(st);
+		}
+		else if (ft_cont(st->a) > ft_cont(st->a->next) && ft_cont(st->a) < \
+				ft_cont(st->a->next->next))
+				ft_sa(st);
+		else
+			ft_ra(st);
+		// ft_putstate(st);
+		// getchar();
+	}
+}
+
+void	ft_sort5(t_state *st)
+{
+	t_sort	sort;
+
+	sort.len = ft_lstsize(st->a);
+	sort.i = sort.len;
+	while (sort.i > 3)
+	{
+		ft_pb(st);
+		++sort.i;
+	}
+	if (ft_cont(st->a) > ft_cont(st->a->next))
+		ft_sa(st);
+	
 }
 
 int	main(int argc, char *argv[])
@@ -126,8 +169,10 @@ int	main(int argc, char *argv[])
 
 	if (!init(argc, argv, &st))
 		return (write(1, "Error\n", 6));
-	//ft_putstate(&st);
+	// ft_putstate(&st);
+	if (ft_lstsize(st.a) == 3)
+		ft_sort3(&st);
 	ft_sort(&st);
-	//ft_putstate(&st);
+	// ft_putstate(&st);
 	return (0);
 }
