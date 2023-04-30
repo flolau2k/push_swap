@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 11:55:50 by flauer            #+#    #+#             */
-/*   Updated: 2023/04/30 15:37:45 by flauer           ###   ########.fr       */
+/*   Updated: 2023/04/30 15:40:45 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,8 +73,8 @@ int	ft_min(t_list *lst)
 // 	t_list	*elmb;
 // }	t_sort;
 
-#include <stdio.h>
-
+// TODO negative numbers!
+// Optimize ... 
 void	ft_sort(t_state *st)
 {
 	int	max;
