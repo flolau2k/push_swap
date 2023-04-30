@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 11:55:50 by flauer            #+#    #+#             */
-/*   Updated: 2023/04/30 15:40:45 by flauer           ###   ########.fr       */
+/*   Updated: 2023/04/30 19:02:50 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,47 +64,59 @@ int	ft_min(t_list *lst)
 	return (min);
 }
 
-// typedef struct s_sort
-// {
-// 	int		max;
-// 	int		min;
-// 	int		mid;
-// 	t_list	*elma;
-// 	t_list	*elmb;
-// }	t_sort;
+typedef struct s_sort
+{
+	int	max;
+	int	factor;
+	int	len;
+	int	i;
+}	t_sort;
+
+bool	ft_sorted(t_state *st)
+{
+	t_list *tmp;
+
+	if (ft_lstsize(st->b) > 0)
+		return (false);
+	tmp = st->a;
+	while (tmp->next)
+	{
+		if (ft_cont(tmp) > ft_cont(tmp->next))
+			return (false);
+		tmp = tmp->next;
+	}
+	return (true);
+}
 
 // TODO negative numbers!
 // Optimize ... 
 void	ft_sort(t_state *st)
 {
-	int	max;
-	int	factor;
-	int	len;
-	int	i = 0;
+	t_sort	sort;
 
-	factor = 1;
-	len = ft_lstsize(st->a);
-	max = ft_max(st->a);
-	while (factor <= max)
+	sort.factor = 1;
+	sort.len = ft_lstsize(st->a);
+	sort.max = ft_max(st->a);
+	while (!ft_sorted(st) && sort.factor <= sort.max)
 	{
-		i = 0;
-		while(i < len)
+		sort.i = 0;
+		while(sort.i < sort.len)
 		{
-			if ((ft_cont(st->a) / factor) % 2)
+			if ((ft_cont(st->a) / sort.factor) % 2)
 			{
 				ft_pb(st);
 				ft_rb(st);
 			}
 			else
 				ft_ra(st);
-			++i;
+			++sort.i;
 		}
 		while(st->b)
 		{
 			ft_pa(st);
 			ft_ra(st);
 		}
-		factor *= 2;
+		sort.factor *= 2;
 	}
 }
 
@@ -114,8 +126,8 @@ int	main(int argc, char *argv[])
 
 	if (!init(argc, argv, &st))
 		return (write(1, "Error\n", 6));
-	ft_putstate(&st);
+	//ft_putstate(&st);
 	ft_sort(&st);
-	ft_putstate(&st);
+	//ft_putstate(&st);
 	return (0);
 }
