@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/28 13:23:07 by flauer            #+#    #+#             */
-/*   Updated: 2023/04/29 11:38:22 by flauer           ###   ########.fr       */
+/*   Updated: 2023/04/30 15:04:27 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,9 @@ t_list	*ft_seclast(t_list *lst)
 	return lst;
 }
 
+/// @brief (reverse rotate lst): Shift down all elements of stack a by 1.
+/// The last element becomes the first one.
+/// @param lst the Stack to rotate
 static void	ft_rrot(t_list **lst)
 {
 	t_list *temp;
@@ -29,18 +32,25 @@ static void	ft_rrot(t_list **lst)
 	*lst = temp;
 }
 
+/// @brief (reverse rotate a): Shift down all elements of stack a by 1.
+/// The last element becomes the first one.
+/// @param st state struct
 void	ft_rra(t_state *st)
 {
 	ft_rrot(&st->a);
 	ft_printf("rra\n");
 }
 
+/// @brief (reverse rotate b): Shift down all elements of stack b by 1.
+/// The last element becomes the first one.
+/// @param st state struct
 void	ft_rrb(t_state *st)
 {
 	ft_rrot(&st->b);
 	ft_printf("rrb\n");
 }
-
+/// @brief rra and rrb at the same time
+/// @param st state struct
 void	ft_rrr(t_state *st)
 {
 	ft_rrot(&st->a);
