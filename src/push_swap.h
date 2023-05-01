@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 11:56:01 by flauer            #+#    #+#             */
-/*   Updated: 2023/04/29 11:41:25 by flauer           ###   ########.fr       */
+/*   Updated: 2023/05/01 11:24:02 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,14 @@ typedef struct s_state
 	t_list	*a;
 	t_list	*b;
 }	t_state;
+
+typedef struct s_sort
+{
+	int	max;
+	int	factor;
+	int	len;
+	int	i;
+}	t_sort;
 
 int		main(int argc, char *argv[]);
 bool	init(int argc, char *argv[], t_state *st);

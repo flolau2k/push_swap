@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/28 14:04:14 by flauer            #+#    #+#             */
-/*   Updated: 2023/04/29 11:33:26 by flauer           ###   ########.fr       */
+/*   Updated: 2023/05/01 11:48:13 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,7 @@ bool	init(int argc, char *argv[], t_state *st)
 {
 	char	**args;
 
-	if (argc < 2)
-		return (false);
-	else if (argc == 2)
+	if (argc == 2)
 	{
 		args = ft_split(argv[1], ' ');
 		argc = ft_alen((const char **)args);
