@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
+/*   By: flauer <flauer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 11:55:50 by flauer            #+#    #+#             */
-/*   Updated: 2023/05/02 13:38:36 by flauer           ###   ########.fr       */
+/*   Updated: 2023/05/02 18:06:25 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,7 +126,7 @@ void	ft_rotus(t_state *st)
 void	ft_rotate(t_state *st)
 {
 	int		len;
-	t_list *lst;
+	t_list	*lst;
 	int 	pos;
 
 	if (sorted(st))
@@ -154,29 +154,25 @@ void	ft_rotn(t_state *st, int n)
 
 void	ft_sort3(t_state *st)
 {
-	while (!sorted(st))
-	{
-		if (rotated(st))
-			return ;
-		else
-			ft_sa(st);
-	}
+	if (rotated(st) >= 0)
+		return ;
+	else
+		ft_sa(st);
 }
 
 /// @brief find the correct location for the top of b to insert in a.
-/// expect a to be sorted already, but may be rotated.
+/// expect a to be sorted already, but may be rotated. Also expect the
+/// Stack a to contain the largest and smallest value already.
 /// @param st state
 int	ft_ins(t_state *st)
 {
 	t_list	*tmp;
 	int		len;
 	int		i;
-	// int		max;
 
 	len = ft_lstsize(st->a);
 	tmp = st->a;
 	i = 0;
-	// max = ft_max(st->a);
 	if (content(st->a) > content(st->b) && content(ft_lstlast(st->a)) < content(st->b))
 		return (i);
 	while (tmp->next)
@@ -192,24 +188,35 @@ int	ft_ins(t_state *st)
 		return (i - len);
 }
 
+/// @brief pushes from a to b in a way that the stack b will be presorted into
+/// chunks.
+/// @param st state
+void	ft_presort(t_state *st)
+{
+	if (ft_lstsize(st->b) == 0)
+		return (ft_pb(st));
+	
+}
+
 void	ft_sortn(t_state *st)
 {
 	int	idx;
 
 	while (ft_lstsize(st->a) > 3)
-		ft_pb(st);
-	if (!rotated(st))
-		ft_sa(st);
+	{
+		if (!(content(st->a) == st->min) && !(content(st->a) == st->max))
+			ft_presort(st);
+		else
+			ft_ra(st);
+	}
+	ft_sort3(st);
 	while (st->b)
 	{
 		idx = ft_ins(st);
-		ft_printf("idx: %i\n", idx);
-		ft_putstate(st);
 		if (idx > 0)
-			ft_rrotn(st, idx);
+			ft_rotn(st, idx);
 		else if (idx < 0)
-			ft_rotn(st, -idx);
-		ft_putstate(st);
+			ft_rrotn(st, -idx);
 		ft_pa(st);
 	}
 }
@@ -222,9 +229,8 @@ int	main(int argc, char *argv[])
 		return (0);
 	if (!init(argc, argv, &st))
 		return (write(1, "Error\n", 6));
-	// ft_sortn(&st);
-	// ft_putstate(&st);
-	ft_printf("rotated returned: %i\n", rotated(&st));
+	ft_printf("low, high = %d, %d\n", st.low, st.high);
+	//ft_sortn(&st);
 	//ft_rotate(&st);
 	return (0);
 }

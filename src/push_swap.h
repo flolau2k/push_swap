@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
+/*   By: flauer <flauer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 11:56:01 by flauer            #+#    #+#             */
-/*   Updated: 2023/05/01 11:24:02 by flauer           ###   ########.fr       */
+/*   Updated: 2023/05/02 17:27:37 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,11 @@ typedef struct s_state
 {
 	t_list	*a;
 	t_list	*b;
+	int		max;
+	int		min;
+	int		low;
+	int		mid;
+	int		high;
 }	t_state;
 
 typedef struct s_sort
@@ -36,6 +41,7 @@ int		main(int argc, char *argv[]);
 bool	init(int argc, char *argv[], t_state *st);
 bool	init_stack(int argc, char *args[], t_state *st);
 void	free_stacks(t_state *st);
+int		content(t_list *elm);
 
 // swap.c
 void	ft_sa(t_state *st);

@@ -3,17 +3,18 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+         #
+#    By: flauer <flauer@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/21 11:55:35 by flauer            #+#    #+#              #
-#    Updated: 2023/04/29 11:26:36 by flauer           ###   ########.fr        #
+#    Updated: 2023/05/02 16:21:10 by flauer           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = push_swap
 
 CC = gcc
-CFLAGS = -g -Wall -Werror -Wextra -mcmodel=large
+CFLAGS = -g -Wall -Werror -Wextra
+#-mcmodel=large
 
 LIBFT_DIR = libft
 
