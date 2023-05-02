@@ -9,13 +9,13 @@
 // 		ft_pb(st);
 // 		++i;
 // 	}
-// 	if (ft_cont(st->a) > ft_cont(st->a->next))
+// 	if (content(st->a) > content(st->a->next))
 // 		ft_sa(st);
 // 	while (st->b)
 // 	{
-// 		if (ft_cont(st->b) < ft_cont(st->a))
+// 		if (content(st->b) < content(st->a))
 // 			ft_pa(st);
-// 		else if (ft_cont(st->b) > ft_cont(st->a) && ft_cont(ft_lstlast(st->a)) < ft_cont(st->b))
+// 		else if (content(st->b) > content(st->a) && content(ft_lstlast(st->a)) < content(st->b))
 // 		{
 // 			ft_pa(st);
 // 			ft_ra(st);
@@ -30,16 +30,16 @@
 // }
 
 
-	// while (!ft_sorted(st))
+	// while (!sorted(st))
 	// {
-	// 	if (ft_cont(st->a) > ft_cont(st->a->next) && ft_cont(st->a->next) > \
-	// 		ft_cont(st->a->next->next))
+	// 	if (content(st->a) > content(st->a->next) && content(st->a->next) > \
+	// 		content(st->a->next->next))
 	// 	{
 	// 		ft_sa(st);
 	// 		ft_rra(st);
 	// 	}
-	// 	else if (ft_cont(st->a) > ft_cont(st->a->next) && ft_cont(st->a) < \
-	// 			ft_cont(st->a->next->next))
+	// 	else if (content(st->a) > content(st->a->next) && content(st->a) < \
+	// 			content(st->a->next->next))
 	// 			ft_sa(st);
 	// 	else
 	// 		ft_ra(st);
@@ -55,11 +55,11 @@
 		ft_pb(st);
 		++sort.i;
 	}
-	if (ft_cont(st->a) > ft_cont(st->a->next))
+	if (content(st->a) > content(st->a->next))
 		ft_sa(st);
 	
 
-int ft_sorted_but_rotated(t_state *st)
+int rotated(t_state *st)
 {
 	int		c;
 	t_list	*lst;
@@ -75,8 +75,8 @@ int ft_sorted_but_rotated(t_state *st)
 	min = ft_min(lst);
 	while (++i && lst->next)
 	{
-		if (ft_cont(lst) > ft_cont(lst->next) && \
-			ft_cont(lst) == max && ft_cont(lst->next) == min)
+		if (content(lst) > content(lst->next) && \
+			content(lst) == max && content(lst->next) == min)
 		{
 			++c;
 			ret = i;
