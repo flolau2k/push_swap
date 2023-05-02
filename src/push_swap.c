@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 11:55:50 by flauer            #+#    #+#             */
-/*   Updated: 2023/05/02 11:16:57 by flauer           ###   ########.fr       */
+/*   Updated: 2023/05/02 13:38:36 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ int rotated(t_state *st)
 	}
 	if (c == 1)
 		return (ret);
-	return (0);
+	return (-1);
 }
 
 /// @brief reverse rotate until sorted
@@ -168,13 +168,15 @@ void	ft_sort3(t_state *st)
 /// @param st state
 int	ft_ins(t_state *st)
 {
-	t_list *tmp;
+	t_list	*tmp;
 	int		len;
 	int		i;
+	// int		max;
 
 	len = ft_lstsize(st->a);
 	tmp = st->a;
 	i = 0;
+	// max = ft_max(st->a);
 	if (content(st->a) > content(st->b) && content(ft_lstlast(st->a)) < content(st->b))
 		return (i);
 	while (tmp->next)
@@ -220,8 +222,9 @@ int	main(int argc, char *argv[])
 		return (0);
 	if (!init(argc, argv, &st))
 		return (write(1, "Error\n", 6));
-	ft_sortn(&st);
-	ft_putstate(&st);
+	// ft_sortn(&st);
+	// ft_putstate(&st);
+	ft_printf("rotated returned: %i\n", rotated(&st));
 	//ft_rotate(&st);
 	return (0);
 }
