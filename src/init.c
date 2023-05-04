@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/28 14:04:14 by flauer            #+#    #+#             */
-/*   Updated: 2023/05/04 13:27:12 by flauer           ###   ########.fr       */
+/*   Updated: 2023/05/04 16:22:51 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,9 +74,11 @@ void add_id(t_list *a, int val, int id)
 void fill_ids(t_state *st, int **lst)
 {
 	int	i;
+	int	len;
 
 	i = 0;
-	while ((*lst)[i])
+	len = ft_lstsize(st->a);
+	while (i < len)
 	{
 		add_id(st->a, (*lst)[i], i);
 		++i;
