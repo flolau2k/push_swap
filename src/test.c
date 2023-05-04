@@ -1,37 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push.c                                             :+:      :+:    :+:   */
+/*   test.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: flauer <flauer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/28 13:10:18 by flauer            #+#    #+#             */
-/*   Updated: 2023/05/04 09:36:04 by flauer           ###   ########.fr       */
+/*   Created: 2023/05/04 09:10:54 by flauer            #+#    #+#             */
+/*   Updated: 2023/05/04 09:11:24 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	ft_pa(t_state *st)
+void	test_ops(t_state *st)
 {
-	t_list	*temp;
-
-	if (ft_lstsize(st->b) < 1)
-		return ;
-	temp = st->b;
-	st->b = st->b->next;
-	ft_lstadd_front(&st->a, temp);
-	ft_printf("pa\n");
-}
-
-void	ft_pb(t_state *st)
-{
-	t_list	*temp;
-
-	if (ft_lstsize(st->a) < 1)
-		return ;
-	temp = st->a;
-	st->a = st->a->next;
-	ft_lstadd_front(&st->b, temp);
-	ft_printf("pb\n");
+	ft_printf("start: \n");
+	ft_putstate(st);
+	ft_pb(st);
+	ft_putstate(st);
+	ft_pa(st);
+	ft_putstate(st);
+	ft_ra(st);
+	ft_putstate(st);
+	ft_pb(st);
+	ft_pb(st);
+	ft_putstate(st);
+	ft_rr(st);
+	ft_putstate(st);
+	ft_rrr(st);
+	ft_putstate(st);
 }

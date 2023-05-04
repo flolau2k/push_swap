@@ -6,63 +6,11 @@
 /*   By: flauer <flauer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 11:55:50 by flauer            #+#    #+#             */
-/*   Updated: 2023/05/02 18:06:25 by flauer           ###   ########.fr       */
+/*   Updated: 2023/05/04 12:04:13 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-void	test_ops(t_state *st)
-{
-	ft_printf("start: \n");
-	ft_putstate(st);
-	ft_pb(st);
-	ft_putstate(st);
-	ft_pa(st);
-	ft_putstate(st);
-	ft_ra(st);
-	ft_putstate(st);
-	ft_pb(st);
-	ft_pb(st);
-	ft_putstate(st);
-	ft_rr(st);
-	ft_putstate(st);
-	ft_rrr(st);
-	ft_putstate(st);
-}
-
-int	content(t_list *elm)
-{
-	return (*(int *)elm->content);
-}
-
-int	ft_max(t_list *lst)
-{
-	int	max;
-
-	max = content(lst);
-	while (lst)
-	{
-		if (content(lst) > max)
-			max = content(lst);
-		lst = lst->next;
-	}
-	return (max);
-}
-
-int	ft_min(t_list *lst)
-{
-	int	min;
-
-	min = content(lst);
-	while (lst)
-	{
-		if (content(lst) < min)
-			min = content(lst);
-		lst = lst->next;
-	}
-	return (min);
-}
 
 bool	sorted(t_state *st)
 {
@@ -80,7 +28,7 @@ bool	sorted(t_state *st)
 	return (true);
 }
 
-int rotated(t_state *st)
+int	rotated(t_state *st)
 {
 	int		c;
 	t_list	*lst;
@@ -114,13 +62,13 @@ int rotated(t_state *st)
 void	ft_rrotus(t_state *st)
 {
 	while (!sorted(st))
-		ft_rra(st);
+		do_op(st, RRA);
 }
 
 void	ft_rotus(t_state *st)
 {
 	while (!sorted(st))
-		ft_ra(st);
+		do_op(st, RA);
 }
 
 void	ft_rotate(t_state *st)
@@ -134,6 +82,8 @@ void	ft_rotate(t_state *st)
 	lst = st->a;
 	len = ft_lstsize(lst);
 	pos = rotated(st);
+	if (pos == -1)
+		ft_printf("rot error\n");
 	if (pos > len / 2)
 		ft_rrotus(st);
 	else
@@ -143,13 +93,13 @@ void	ft_rotate(t_state *st)
 void	ft_rrotn(t_state *st, int n)
 {
 	while (n-- > 0)
-		ft_rra(st);
+		do_op(st, RRA);
 }
 
 void	ft_rotn(t_state *st, int n)
 {
 	while (n-- > 0)
-		ft_ra(st);
+		do_op(st, RA);
 }
 
 void	ft_sort3(t_state *st)
@@ -157,28 +107,30 @@ void	ft_sort3(t_state *st)
 	if (rotated(st) >= 0)
 		return ;
 	else
-		ft_sa(st);
+		do_op(st, SA);
 }
 
-/// @brief find the correct location for the top of b to insert in a.
-/// expect a to be sorted already, but may be rotated. Also expect the
-/// Stack a to contain the largest and smallest value already.
-/// @param st state
-int	ft_ins(t_state *st)
+/// @brief find the number of operations needed for the first element of src
+/// to be inserted into dst at the correct location.
+/// @param dst destination list
+/// @param src source element
+/// @return position to insert; number of rotate operations respectively. 
+/// if return is < 0, reverse rotation is needed, else normal rotation.
+int	_ft_ins(t_list *dst, t_list *src)
 {
 	t_list	*tmp;
 	int		len;
 	int		i;
 
-	len = ft_lstsize(st->a);
-	tmp = st->a;
+	len = ft_lstsize(dst);
+	tmp = dst;
 	i = 0;
-	if (content(st->a) > content(st->b) && content(ft_lstlast(st->a)) < content(st->b))
+	if (content(dst) > content(src) && content(ft_lstlast(dst)) < content(src))
 		return (i);
 	while (tmp->next)
 	{
 		++i;
-		if (content(tmp) < content(st->b) && content(tmp->next) > content(st->b))
+		if (content(tmp) < content(src) && content(tmp->next) > content(src))
 			break ;
 		tmp = tmp->next;
 	}
@@ -188,13 +140,22 @@ int	ft_ins(t_state *st)
 		return (i - len);
 }
 
+/// @brief find the correct location for the top of b to insert in a.
+/// expect a to be sorted already, but may be rotated. Also expect the
+/// Stack a to contain the largest and smallest value already.
+/// @param st state
+int	ft_ins(t_state *st)
+{
+	return (_ft_ins(st->a, st->b));
+}
+
 /// @brief pushes from a to b in a way that the stack b will be presorted into
 /// chunks.
 /// @param st state
 void	ft_presort(t_state *st)
 {
 	if (ft_lstsize(st->b) == 0)
-		return (ft_pb(st));
+		return (do_op(st, PB));
 	
 }
 
@@ -207,9 +168,14 @@ void	ft_sortn(t_state *st)
 		if (!(content(st->a) == st->min) && !(content(st->a) == st->max))
 			ft_presort(st);
 		else
-			ft_ra(st);
+			do_op(st, RA);
 	}
 	ft_sort3(st);
+	if (rotated(st) == -1)
+	{
+		ft_printf("assert false: sort3 rotated.");
+		return ;
+	}
 	while (st->b)
 	{
 		idx = ft_ins(st);
@@ -217,7 +183,18 @@ void	ft_sortn(t_state *st)
 			ft_rotn(st, idx);
 		else if (idx < 0)
 			ft_rrotn(st, -idx);
-		ft_pa(st);
+		do_op(st, PA);
+	}
+}
+
+void	get_num_ops_pb(t_state *st)
+{
+	t_list	*elm;
+
+	elm = st->a;
+	while (elm)
+	{
+		
 	}
 }
 
@@ -229,8 +206,8 @@ int	main(int argc, char *argv[])
 		return (0);
 	if (!init(argc, argv, &st))
 		return (write(1, "Error\n", 6));
-	ft_printf("low, high = %d, %d\n", st.low, st.high);
-	//ft_sortn(&st);
-	//ft_rotate(&st);
+	//ft_printf("low, high = %d, %d\n", st.low, st.high);
+	ft_radix(&st);
+	do_op(&st, FLSH);
 	return (0);
 }

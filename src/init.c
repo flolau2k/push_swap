@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/28 14:04:14 by flauer            #+#    #+#             */
-/*   Updated: 2023/05/02 18:01:27 by flauer           ###   ########.fr       */
+/*   Updated: 2023/05/04 13:27:12 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,31 @@ void	pre_quicksort(int **lst, int l, int r)
 	}
 }
 
+void add_id(t_list *a, int val, int id)
+{
+	while (a)
+	{
+		if (content(a) == val)
+		{
+			((t_elm *)a->content)->id = id;
+			break ;
+		}
+		a = a->next;
+	}
+}
+
+void fill_ids(t_state *st, int **lst)
+{
+	int	i;
+
+	i = 0;
+	while ((*lst)[i])
+	{
+		add_id(st->a, (*lst)[i], i);
+		++i;
+	}
+}
+
 void	find_sectors(t_state *st)
 {
 	int		*lst;
@@ -77,12 +102,25 @@ void	find_sectors(t_state *st)
 	st->low = lst[i/3];
 	st->high = lst[(i/3)*2];
 	st->mid = lst[i/2];
+	fill_ids(st, &lst);
+}
+
+t_elm	*new_elm(int *content)
+{
+	t_elm	*ret;
+
+	ret = malloc(sizeof(t_elm));
+	if (!ret)
+		return (NULL);
+	ret->content = content;
+	ret->id = 0;
+	return ret;
 }
 
 bool	init_stack(int argc, char *args[], t_state *st)
 {
 	int			i;
-	int			*curr_val;
+	t_elm		*curr_elm;
 	static bool	check[UINT32_MAX];
 
 	i = 0;
@@ -90,20 +128,20 @@ bool	init_stack(int argc, char *args[], t_state *st)
 	st->b = NULL;
 	while (i < argc)
 	{
-		curr_val = ft_atoi(args[i]);
+		curr_elm = new_elm(ft_atoi(args[i]));
 		if (i == 0)
 		{
-			st->min = *curr_val;
+			st->min = *curr_elm->content;
 			st->max = st->min;
 		}
-		if (!curr_val || check[(unsigned int) *curr_val])
+		if (!curr_elm || check[(unsigned int) *curr_elm->content])
 			return (false);
-		if (*curr_val < st->min)
-			st->min = *curr_val;
-		else if (*curr_val > st->max)
-			st->max = *curr_val;
-		check[(unsigned int) *curr_val] = true;
-		ft_lstadd_back(&st->a, ft_lstnew(curr_val));
+		if (*curr_elm->content < st->min)
+			st->min = *curr_elm->content;
+		else if (*curr_elm->content > st->max)
+			st->max = *curr_elm->content;
+		check[(unsigned int) *curr_elm->content] = true;
+		ft_lstadd_back(&st->a, ft_lstnew(curr_elm));
 		++i;
 	}
 	find_sectors(st);
