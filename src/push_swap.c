@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 11:55:50 by flauer            #+#    #+#             */
-/*   Updated: 2023/05/04 12:04:13 by flauer           ###   ########.fr       */
+/*   Updated: 2023/05/04 17:41:30 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,34 +110,34 @@ void	ft_sort3(t_state *st)
 		do_op(st, SA);
 }
 
-/// @brief find the number of operations needed for the first element of src
-/// to be inserted into dst at the correct location.
+/// @brief find the insert position for the element src into list dst at the 
+/// correct location. expect dst to be sorted already, but may be rotated.
 /// @param dst destination list
 /// @param src source element
 /// @return position to insert; number of rotate operations respectively. 
 /// if return is < 0, reverse rotation is needed, else normal rotation.
 int	_ft_ins(t_list *dst, t_list *src)
 {
-	t_list	*tmp;
-	int		len;
-	int		i;
+	t_ins	ins;
 
-	len = ft_lstsize(dst);
-	tmp = dst;
-	i = 0;
-	if (content(dst) > content(src) && content(ft_lstlast(dst)) < content(src))
-		return (i);
-	while (tmp->next)
+	ins.len = ft_lstsize(dst);
+	ins.tmp = dst;
+	ins.i = 0;
+	ins.ret = 0;
+	ins.thres = content(src);
+	if (ins.thres < ft_min(dst) || ins.thres > ft_max(dst))
+		ins.thres = ft_min(dst);
+	while (ins.tmp->next)
 	{
-		++i;
-		if (content(tmp) < content(src) && content(tmp->next) > content(src))
+		++ins.i;
+		if (content(ins.tmp) < ins.thres && content(ins.tmp->next) > ins.thres)
 			break ;
-		tmp = tmp->next;
+		ins.tmp = ins.tmp->next;
 	}
-	if (i <= len / 2)
-		return (i);
+	if (ins.i <= ins.len / 2)
+		return (ins.i);
 	else
-		return (i - len);
+		return (ins.i - ins.len);
 }
 
 /// @brief find the correct location for the top of b to insert in a.
@@ -166,7 +166,7 @@ void	ft_sortn(t_state *st)
 	while (ft_lstsize(st->a) > 3)
 	{
 		if (!(content(st->a) == st->min) && !(content(st->a) == st->max))
-			ft_presort(st);
+			do_op(st, PB);
 		else
 			do_op(st, RA);
 	}
@@ -185,17 +185,7 @@ void	ft_sortn(t_state *st)
 			ft_rrotn(st, -idx);
 		do_op(st, PA);
 	}
-}
-
-void	get_num_ops_pb(t_state *st)
-{
-	t_list	*elm;
-
-	elm = st->a;
-	while (elm)
-	{
-		
-	}
+	ft_rotate(st);
 }
 
 int	main(int argc, char *argv[])
@@ -206,8 +196,11 @@ int	main(int argc, char *argv[])
 		return (0);
 	if (!init(argc, argv, &st))
 		return (write(1, "Error\n", 6));
-	//ft_printf("low, high = %d, %d\n", st.low, st.high);
-	ft_radix(&st);
-	do_op(&st, FLSH);
+	//ft_radix(&st);
+	if (ft_lstsize(st.a) <= 50)
+		ft_sortn(&st);
+	else
+		ft_radix(&st);
+	do_op(&st, FLUSH);
 	return (0);
 }

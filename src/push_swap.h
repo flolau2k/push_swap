@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 11:56:01 by flauer            #+#    #+#             */
-/*   Updated: 2023/05/04 13:21:10 by flauer           ###   ########.fr       */
+/*   Updated: 2023/05/04 17:37:44 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@
 # define RRA	9
 # define RRB	10
 # define RRR	11
-# define FLSH	12
+# define FLUSH	12
 
 typedef struct s_state
 {
@@ -55,6 +55,15 @@ typedef struct s_sort
 	int	len;
 	int	i;
 }	t_sort;
+
+typedef struct s_ins
+{
+	t_list	*tmp;
+	int		len;
+	int		i;
+	int		ret;
+	int		thres;
+}	t_ins;
 
 int		main(int argc, char *argv[]);
 bool	init(int argc, char *argv[], t_state *st);

@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 09:36:43 by flauer            #+#    #+#             */
-/*   Updated: 2023/05/04 12:03:02 by flauer           ###   ########.fr       */
+/*   Updated: 2023/05/04 16:57:51 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@ void	do_op(t_state *st, int op)
 {
 	static int	op_cache;
 
-	if (op == FLSH)
-		return (handle_op(st, op_cache));
+	if (op == FLUSH)
+		return (op_cache = 0, handle_op(st, op_cache));
 	else if ((op_cache == SA && op == SB) || (op_cache == SB && op == SA))
 		return (op_cache = 0, ft_ss(st));
 	else if ((op_cache == RA && op == RB) || (op_cache == RB && op == RA))
