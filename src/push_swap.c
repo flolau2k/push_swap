@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 11:55:50 by flauer            #+#    #+#             */
-/*   Updated: 2023/05/05 13:44:22 by flauer           ###   ########.fr       */
+/*   Updated: 2023/05/05 14:56:23 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -189,14 +189,16 @@ bool	same_chunk(t_state *st, int i, int j)
 
 /// @brief work with IDs!
 /// @param st 
-int	sort_in_chunks(t_state *st, int src_id)
+int	sort_in_chunks(t_state *st)
 {
 	int		i;
 	int		len;
 	t_list	*tmp;
+	int		src_id;
 
 	tmp = st->b;
 	i = 0;
+	src_id = id(st->a);
 	len = ft_lstsize(tmp);
 	while (tmp)
 	{
@@ -206,7 +208,7 @@ int	sort_in_chunks(t_state *st, int src_id)
 		++i;
 	}
 	if (i < len / 2)
-		return (i); //ft_rotn(st, i, 'b');
+		return (i);
 	else
 	{
 		while (tmp && same_chunk(st, id(tmp), src_id))
@@ -214,9 +216,8 @@ int	sort_in_chunks(t_state *st, int src_id)
 			++i;
 			tmp = tmp->next;
 		}
-		return (len - i); //ft_rrotn(st, len - i, 'b');
+		return (i - len);
 	}
-	// do_op(st, PB);
 }
 
 void	best_rot(t_state *st, char lst_id, int c)
@@ -236,68 +237,31 @@ void	best_rot(t_state *st, char lst_id, int c)
 
 void	ft_presort(t_state *st)
 {
-	int	ops;
-	int	curr_ops;
-	t_list	*tmp;
-	int		c;
-	int		c_min;
+	int	pos;
 
-	while (ft_lstsize(st->b) < 3)
-		ft_pb(st);
-	// if (!rotated(st->b))
-	// 	ft_sb(st);
-	while (ft_lstsize(st->a) > 3)
-	{
-		tmp = st->a;
-		c = 0;
-		c_min = 0;
-		ops = sort_in_chunks(st, id(st->a));
-		while (tmp)
-		{
-			if (!(content(tmp) == st->min) && !(content(tmp) == st->max))
-			{
-				curr_ops = sort_in_chunks(st, id(tmp));
-				if (curr_ops + c < ops + c_min)
-				{
-					ops = curr_ops;
-					c_min = c;
-				}
-			}
-			++c;
-			tmp = tmp->next;
-		}
-		best_rot(st, 'a', c_min);
-		best_rot(st, 'b', ops);
-		ft_pb(st);
-	}
+	if (ft_lstsize(st->b) == 0)
+		return (ft_pb(st));
+	pos = sort_in_chunks(st);
+	if (pos == 0)
+		return (ft_pb(st));
+	else if (pos > 0)
+		return (ft_rotn(st, pos, 'b'), ft_pb(st));
+	else
+		return (ft_rrotn(st, -pos, 'b'), ft_pb(st));
 }
 
 void	ft_sortn(t_state *st)
 {
 	int	idx;
-	t_list	*tmp;
 
-	if (st->len < 6)
+	while (ft_lstsize(st->a) > 3)
 	{
-		while (ft_lstsize(st->a) > 3)
-		{
-			tmp = st->a;
-			while (tmp)
-			{
-				if (!(content(tmp) == st->min) && !(content(tmp) == st->max))
-					ft_pb(st);
-				tmp = tmp->next;
-			}
-		}
+		if (!(content(st->a) == st->min) && !(content(st->a) == st->max))
+			ft_presort(st);
+		else
+			do_op(st, RA);
 	}
-	else
-		ft_presort(st);
 	ft_sort3(st);
-	if (rotated(st->a) == -1)
-	{
-		ft_printf("assert false: sort3 rotated.");
-		return ;
-	}
 	while (st->b)
 	{
 		idx = ft_ins(st);

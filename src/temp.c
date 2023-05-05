@@ -88,3 +88,42 @@ int rotated(t_state *st)
 		return (ret);
 	return (0);
 }
+
+
+void	ft_presort(t_state *st)
+{
+	int	ops;
+	int	curr_ops;
+	t_list	*tmp;
+	int		c;
+	int		c_min;
+
+	while (ft_lstsize(st->b) < 3)
+		ft_pb(st);
+	// if (!rotated(st->b))
+	// 	ft_sb(st);
+	while (ft_lstsize(st->a) > 3)
+	{
+		tmp = st->a;
+		c = 0;
+		c_min = 0;
+		ops = sort_in_chunks(st, id(st->a));
+		while (tmp)
+		{
+			if (!(content(tmp) == st->min) && !(content(tmp) == st->max))
+			{
+				curr_ops = sort_in_chunks(st, id(tmp));
+				if (curr_ops + c < ops + c_min)
+				{
+					ops = curr_ops;
+					c_min = c;
+				}
+			}
+			++c;
+			tmp = tmp->next;
+		}
+		best_rot(st, 'a', c_min);
+		best_rot(st, 'b', ops);
+		ft_pb(st);
+	}
+}
