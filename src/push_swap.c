@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 11:55:50 by flauer            #+#    #+#             */
-/*   Updated: 2023/05/05 14:56:23 by flauer           ###   ########.fr       */
+/*   Updated: 2023/05/05 15:41:39 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,20 +56,6 @@ int	rotated(t_list	*lst)
 	return (-1);
 }
 
-/// @brief reverse rotate until sorted
-/// @param st state
-void	ft_rrotus(t_state *st)
-{
-	while (!sorted(st))
-		ft_rra(st);
-}
-
-void	ft_rotus(t_state *st)
-{
-	while (!sorted(st))
-		ft_ra(st);
-}
-
 void	ft_rrotn(t_state *st, int n, char lst)
 {
 	if (lst == 'a')
@@ -116,7 +102,6 @@ void	ft_rotate(t_state *st)
 	else
 		ft_rotn(st, pos, 'a');
 }
-
 
 void	ft_sort3(t_state *st)
 {
@@ -187,7 +172,8 @@ bool	same_chunk(t_state *st, int i, int j)
 	return (false);
 }
 
-/// @brief work with IDs!
+/// @brief work with IDs! TODO: look for the next cheapest operation. use the chunk_len to see, if in
+/// the range of + or - chunk_len another item of the same chunk is. maybe use double linked lists?
 /// @param st 
 int	sort_in_chunks(t_state *st)
 {
@@ -218,6 +204,35 @@ int	sort_in_chunks(t_state *st)
 		}
 		return (i - len);
 	}
+}
+
+int	chunk_len(t_state *st)
+{
+	int		ret;
+	int		len;
+	t_list	*temp;
+	int		src_id;
+	int		i;
+
+	ret = 0;
+	i = 0;
+	temp = st->b;
+	src_id = id(temp);
+	len = ft_lstsize(temp);
+	while (temp && same_chunk(st, src_id, id(temp)))
+	{
+		++i;
+		temp = temp->next;
+	}
+	ret = i;
+	while (temp && !same_chunk(st, src_id, id(temp)))
+	{
+		++i;
+		temp = temp->next;
+	}
+	if (temp && same_chunk(st, src_id, id(temp)) && len - i < ret)
+		return (i - len);
+	return ret;
 }
 
 void	best_rot(t_state *st, char lst_id, int c)
@@ -282,11 +297,6 @@ int	main(int argc, char *argv[])
 		return (0);
 	if (!init(argc, argv, &st))
 		return (write(1, "Error\n", 6));
-	//ft_radix(&st);
-	// if (ft_lstsize(st.a) <= 50)
 	ft_sortn(&st);
-	// else
-	// 	ft_radix(&st);
-	// do_op(&st, FLUSH);
 	return (0);
 }
