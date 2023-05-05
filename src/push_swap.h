@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 11:56:01 by flauer            #+#    #+#             */
-/*   Updated: 2023/05/05 09:20:53 by flauer           ###   ########.fr       */
+/*   Updated: 2023/05/05 11:39:28 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,13 @@ typedef struct s_state
 	int		mid;
 	int		high;
 	int		len;
+	int		num_chunks;
 }	t_state;
+
+// typedef struct s_data
+// {
+
+// }	t_data;
 
 typedef struct s_elm
 {

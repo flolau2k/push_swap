@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 11:55:50 by flauer            #+#    #+#             */
-/*   Updated: 2023/05/05 09:48:45 by flauer           ###   ########.fr       */
+/*   Updated: 2023/05/05 13:44:22 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,29 +28,28 @@ bool	sorted(t_state *st)
 	return (true);
 }
 
-int	rotated(t_state *st)
+int	rotated(t_list	*lst)
 {
 	int		c;
-	t_list	*lst;
+	t_list	*tmp;
 	t_list	*next;
 	int		i;
 	int		ret;
 
 	c = 0;
 	i = 0;
-	lst = st->a;
-	while (++i && lst)
+	tmp = lst;
+	while (++i && tmp)
 	{
-		if (!lst->next)
-			next = st->a;
-		else
-			next = lst->next;
-		if (content(lst) > content(next))
+		next = tmp->next;
+		if (!next)
+			next = lst;
+		if (content(tmp) > content(next))
 		{
 			++c;
 			ret = i;
 		}
-		lst = lst->next;
+		tmp = tmp->next;
 	}
 	if (c == 1)
 		return (ret);
@@ -62,13 +61,41 @@ int	rotated(t_state *st)
 void	ft_rrotus(t_state *st)
 {
 	while (!sorted(st))
-		do_op(st, RRA);
+		ft_rra(st);
 }
 
 void	ft_rotus(t_state *st)
 {
 	while (!sorted(st))
-		do_op(st, RA);
+		ft_ra(st);
+}
+
+void	ft_rrotn(t_state *st, int n, char lst)
+{
+	if (lst == 'a')
+	{
+		while (n-- > 0)
+			ft_rra(st);
+	}
+	else
+	{
+		while (n-- > 0)
+			ft_rrb(st);
+	}
+}
+
+void	ft_rotn(t_state *st, int n, char lst)
+{
+	if (lst == 'a')
+	{
+		while (n-- > 0)
+			ft_ra(st);
+	}
+	else
+	{
+		while (n-- > 0)
+			ft_rb(st);
+	}
 }
 
 void	ft_rotate(t_state *st)
@@ -81,43 +108,22 @@ void	ft_rotate(t_state *st)
 		return ;
 	lst = st->a;
 	len = ft_lstsize(lst);
-	pos = rotated(st);
+	pos = rotated(st->a);
 	if (pos == -1)
 		ft_printf("rot error\n");
 	if (pos > len / 2)
-		ft_rrotus(st);
+		ft_rrotn(st, len - pos, 'a');
 	else
-		ft_rotus(st);
+		ft_rotn(st, pos, 'a');
 }
 
-void	ft_rrotn(t_state *st, int n, char lst)
-{
-	int	op;
-
-	op = RRB;
-	if (lst == 'a' || lst == 'A')
-		op = RRA;
-	while (n-- > 0)
-		do_op(st, op);
-}
-
-void	ft_rotn(t_state *st, int n, char lst)
-{
-	int	op;
-
-	op = RB;
-	if (lst == 'a' || lst == 'A')
-		op = RA;
-	while (n-- > 0)
-		do_op(st, RA);
-}
 
 void	ft_sort3(t_state *st)
 {
-	if (rotated(st) >= 0)
+	if (rotated(st->a) >= 0)
 		return ;
 	else
-		do_op(st, SA);
+		ft_sa(st);
 }
 
 /// @brief find the insert position for the element src into list dst at the 
@@ -159,64 +165,135 @@ int	ft_ins(t_state *st)
 	return (_ft_ins(st->a, st->b));
 }
 
-int	_ins_chunk(t_state *st)
+bool	same_chunk(t_state *st, int i, int j)
 {
-	t_ins	ins;
-	int		chunk_low;
-	int		chunk_high;
+	int	chunk;
+	int	chunk_size;
 
-	ins.tmp = st->b;
-	ins.i = 0;
-	chunk_high = 0;
-	chunk_low = 0;
-	if (content(st->a) < st->low)
-		chunk_high = st->low;
-	else if (content(st->a) < st->high)
-		chunk_high = st->high;
-	while (ins.tmp)
+	chunk = 1;
+	chunk_size = st->len / st->num_chunks;
+	while (chunk <= st->num_chunks)
 	{
-		if (content(st->b) > chunk_low && content(st->b) <=  chunk_high)
+		if (i >= chunk_size * (chunk - 1) && i < chunk_size * chunk)
 			break ;
-		ins.tmp = ins.tmp->next;
-		++ins.i;
+		if (chunk == st->num_chunks && i >= chunk_size * (chunk - 1) && i < st->len)
+			break ;
+		++chunk;
 	}
-	if (ins.i <= st->len / 2)
-		return (ins.i);
-	else
-		return (ins.i - st->len);
+	if (j >= chunk_size * (chunk - 1) && j < chunk_size * chunk)
+		return (true);
+	if (chunk == st->num_chunks && j >= chunk_size * (chunk - 1) && j < st->len)
+		return (true);
+	return (false);
 }
 
-/// @brief pushes from a to b in a way that the stack b will be presorted into
-/// chunks.
-/// @param st state
+/// @brief work with IDs!
+/// @param st 
+int	sort_in_chunks(t_state *st, int src_id)
+{
+	int		i;
+	int		len;
+	t_list	*tmp;
+
+	tmp = st->b;
+	i = 0;
+	len = ft_lstsize(tmp);
+	while (tmp)
+	{
+		if (same_chunk(st, id(tmp), src_id))
+			break ;
+		tmp = tmp->next;
+		++i;
+	}
+	if (i < len / 2)
+		return (i); //ft_rotn(st, i, 'b');
+	else
+	{
+		while (tmp && same_chunk(st, id(tmp), src_id))
+		{
+			++i;
+			tmp = tmp->next;
+		}
+		return (len - i); //ft_rrotn(st, len - i, 'b');
+	}
+	// do_op(st, PB);
+}
+
+void	best_rot(t_state *st, char lst_id, int c)
+{
+	int	len;
+	t_list *lst;
+
+	lst = st->a;
+	if (lst_id == 'b' || lst_id == 'B')
+		lst = st->b;
+	len = ft_lstsize(lst);
+	if (c < len / 2)
+		ft_rotn(st, c, lst_id);
+	else
+		ft_rrotn(st, len - c, lst_id);
+}
+
 void	ft_presort(t_state *st)
 {
-	int	pos;
+	int	ops;
+	int	curr_ops;
+	t_list	*tmp;
+	int		c;
+	int		c_min;
 
-	if (ft_lstsize(st->b) == 0)
-		return (do_op(st, PB));
-	pos = _ins_chunk(st);
-	if (pos == 0)
-		return (do_op(st, PB));
-	else if (pos > 0)
-		return (ft_rotn(st, pos, 'b'), do_op(st, PB));
-	else
-		return (ft_rrotn(st, -pos, 'b'), do_op(st, PB));
+	while (ft_lstsize(st->b) < 3)
+		ft_pb(st);
+	// if (!rotated(st->b))
+	// 	ft_sb(st);
+	while (ft_lstsize(st->a) > 3)
+	{
+		tmp = st->a;
+		c = 0;
+		c_min = 0;
+		ops = sort_in_chunks(st, id(st->a));
+		while (tmp)
+		{
+			if (!(content(tmp) == st->min) && !(content(tmp) == st->max))
+			{
+				curr_ops = sort_in_chunks(st, id(tmp));
+				if (curr_ops + c < ops + c_min)
+				{
+					ops = curr_ops;
+					c_min = c;
+				}
+			}
+			++c;
+			tmp = tmp->next;
+		}
+		best_rot(st, 'a', c_min);
+		best_rot(st, 'b', ops);
+		ft_pb(st);
+	}
 }
 
 void	ft_sortn(t_state *st)
 {
 	int	idx;
+	t_list	*tmp;
 
-	while (ft_lstsize(st->a) > 3)
+	if (st->len < 6)
 	{
-		if (!(content(st->a) == st->min) && !(content(st->a) == st->max))
-			ft_presort(st);
-		else
-			do_op(st, RA);
+		while (ft_lstsize(st->a) > 3)
+		{
+			tmp = st->a;
+			while (tmp)
+			{
+				if (!(content(tmp) == st->min) && !(content(tmp) == st->max))
+					ft_pb(st);
+				tmp = tmp->next;
+			}
+		}
 	}
+	else
+		ft_presort(st);
 	ft_sort3(st);
-	if (rotated(st) == -1)
+	if (rotated(st->a) == -1)
 	{
 		ft_printf("assert false: sort3 rotated.");
 		return ;
@@ -228,7 +305,7 @@ void	ft_sortn(t_state *st)
 			ft_rotn(st, idx, 'a');
 		else if (idx < 0)
 			ft_rrotn(st, -idx, 'a');
-		do_op(st, PA);
+		ft_pa(st);
 	}
 	ft_rotate(st);
 }
@@ -242,10 +319,10 @@ int	main(int argc, char *argv[])
 	if (!init(argc, argv, &st))
 		return (write(1, "Error\n", 6));
 	//ft_radix(&st);
-	if (ft_lstsize(st.a) <= 50)
-		ft_sortn(&st);
-	else
-		ft_radix(&st);
-	do_op(&st, FLUSH);
+	// if (ft_lstsize(st.a) <= 50)
+	ft_sortn(&st);
+	// else
+	// 	ft_radix(&st);
+	// do_op(&st, FLUSH);
 	return (0);
 }

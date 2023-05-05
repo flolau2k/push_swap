@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rev_rot.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
+/*   By: flauer <flauer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/28 13:23:07 by flauer            #+#    #+#             */
-/*   Updated: 2023/04/30 15:04:27 by flauer           ###   ########.fr       */
+/*   Updated: 2023/05/05 12:11:58 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ t_list	*ft_seclast(t_list *lst)
 {
 	while (lst->next->next)
 		lst = lst->next;
-	return lst;
+	return (lst);
 }
 
 /// @brief (reverse rotate lst): Shift down all elements of stack a by 1.
