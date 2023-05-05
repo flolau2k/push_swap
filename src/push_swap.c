@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 11:55:50 by flauer            #+#    #+#             */
-/*   Updated: 2023/05/04 17:41:30 by flauer           ###   ########.fr       */
+/*   Updated: 2023/05/05 09:48:45 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,14 +90,24 @@ void	ft_rotate(t_state *st)
 		ft_rotus(st);
 }
 
-void	ft_rrotn(t_state *st, int n)
+void	ft_rrotn(t_state *st, int n, char lst)
 {
+	int	op;
+
+	op = RRB;
+	if (lst == 'a' || lst == 'A')
+		op = RRA;
 	while (n-- > 0)
-		do_op(st, RRA);
+		do_op(st, op);
 }
 
-void	ft_rotn(t_state *st, int n)
+void	ft_rotn(t_state *st, int n, char lst)
 {
+	int	op;
+
+	op = RB;
+	if (lst == 'a' || lst == 'A')
+		op = RA;
 	while (n-- > 0)
 		do_op(st, RA);
 }
@@ -125,8 +135,8 @@ int	_ft_ins(t_list *dst, t_list *src)
 	ins.i = 0;
 	ins.ret = 0;
 	ins.thres = content(src);
-	if (ins.thres < ft_min(dst) || ins.thres > ft_max(dst))
-		ins.thres = ft_min(dst);
+	if (content(dst) > content(src) && content(ft_lstlast(dst)) < content(src))
+		return (ins.i);
 	while (ins.tmp->next)
 	{
 		++ins.i;
@@ -149,14 +159,49 @@ int	ft_ins(t_state *st)
 	return (_ft_ins(st->a, st->b));
 }
 
+int	_ins_chunk(t_state *st)
+{
+	t_ins	ins;
+	int		chunk_low;
+	int		chunk_high;
+
+	ins.tmp = st->b;
+	ins.i = 0;
+	chunk_high = 0;
+	chunk_low = 0;
+	if (content(st->a) < st->low)
+		chunk_high = st->low;
+	else if (content(st->a) < st->high)
+		chunk_high = st->high;
+	while (ins.tmp)
+	{
+		if (content(st->b) > chunk_low && content(st->b) <=  chunk_high)
+			break ;
+		ins.tmp = ins.tmp->next;
+		++ins.i;
+	}
+	if (ins.i <= st->len / 2)
+		return (ins.i);
+	else
+		return (ins.i - st->len);
+}
+
 /// @brief pushes from a to b in a way that the stack b will be presorted into
 /// chunks.
 /// @param st state
 void	ft_presort(t_state *st)
 {
+	int	pos;
+
 	if (ft_lstsize(st->b) == 0)
 		return (do_op(st, PB));
-	
+	pos = _ins_chunk(st);
+	if (pos == 0)
+		return (do_op(st, PB));
+	else if (pos > 0)
+		return (ft_rotn(st, pos, 'b'), do_op(st, PB));
+	else
+		return (ft_rrotn(st, -pos, 'b'), do_op(st, PB));
 }
 
 void	ft_sortn(t_state *st)
@@ -166,7 +211,7 @@ void	ft_sortn(t_state *st)
 	while (ft_lstsize(st->a) > 3)
 	{
 		if (!(content(st->a) == st->min) && !(content(st->a) == st->max))
-			do_op(st, PB);
+			ft_presort(st);
 		else
 			do_op(st, RA);
 	}
@@ -180,9 +225,9 @@ void	ft_sortn(t_state *st)
 	{
 		idx = ft_ins(st);
 		if (idx > 0)
-			ft_rotn(st, idx);
+			ft_rotn(st, idx, 'a');
 		else if (idx < 0)
-			ft_rrotn(st, -idx);
+			ft_rrotn(st, -idx, 'a');
 		do_op(st, PA);
 	}
 	ft_rotate(st);

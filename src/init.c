@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/28 14:04:14 by flauer            #+#    #+#             */
-/*   Updated: 2023/05/04 16:22:51 by flauer           ###   ########.fr       */
+/*   Updated: 2023/05/05 09:21:20 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,6 +119,19 @@ t_elm	*new_elm(int *content)
 	return ret;
 }
 
+void	max_min(t_state *st, int curr_val, int i)
+{
+	if (i == 0)
+	{
+		st->min = curr_val;
+		st->max = st->min;
+	}
+	if (curr_val < st->min)
+		st->min = curr_val;
+	else if (curr_val > st->max)
+		st->max = curr_val;
+}
+
 bool	init_stack(int argc, char *args[], t_state *st)
 {
 	int			i;
@@ -131,21 +144,14 @@ bool	init_stack(int argc, char *args[], t_state *st)
 	while (i < argc)
 	{
 		curr_elm = new_elm(ft_atoi(args[i]));
-		if (i == 0)
-		{
-			st->min = *curr_elm->content;
-			st->max = st->min;
-		}
+		max_min(st, *curr_elm->content, i);
 		if (!curr_elm || check[(unsigned int) *curr_elm->content])
 			return (false);
-		if (*curr_elm->content < st->min)
-			st->min = *curr_elm->content;
-		else if (*curr_elm->content > st->max)
-			st->max = *curr_elm->content;
 		check[(unsigned int) *curr_elm->content] = true;
 		ft_lstadd_back(&st->a, ft_lstnew(curr_elm));
 		++i;
 	}
+	st->len = argc;
 	find_sectors(st);
 	return (true);
 }
