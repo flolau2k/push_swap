@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 11:55:50 by flauer            #+#    #+#             */
-/*   Updated: 2023/05/05 15:41:39 by flauer           ###   ########.fr       */
+/*   Updated: 2023/05/05 16:49:02 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -206,6 +206,10 @@ int	sort_in_chunks(t_state *st)
 	}
 }
 
+/// @brief take the current element ontop of b and check, how long its chunk is,
+/// in both directions.
+/// @param st 
+/// @return the minimum number of operations to get in a different chunk.
 int	chunk_len(t_state *st)
 {
 	int		ret;
@@ -250,7 +254,7 @@ void	best_rot(t_state *st, char lst_id, int c)
 		ft_rrotn(st, len - c, lst_id);
 }
 
-void	ft_presort(t_state *st)
+void	_ft_presort(t_state *st)
 {
 	int	pos;
 
@@ -265,17 +269,56 @@ void	ft_presort(t_state *st)
 		return (ft_rrotn(st, -pos, 'b'), ft_pb(st));
 }
 
+int	rot_a_cheapest(t_state *st)
+{
+	int		chs;
+	int		ret;
+	int		i;
+	t_list	*tmp;
+
+	chs = chunk_len(st);
+	ret = 0;
+	i = 0;
+	tmp = st->a;
+	while (tmp && !same_chunk(st, id(tmp), id(st->b)))
+	{
+		if (ret == chs)
+			break;
+		++ret;
+		tmp = tmp->next;
+	}
+	tmp = ft_lstlast(st->a);
+	while (tmp && !same_chunk(st, id(tmp), id(st->b)))
+	{
+		if (i == chs)
+			break ;
+		++i;
+		tmp = tmp->prev;
+	}
+	return ()
+}
+
+void	ft_presort(t_state *st)
+{
+	while (ft_lstsize(st->a) > 3)
+	{
+		push_cheapest(st);
+	}
+
+	// while (ft_lstsize(st->a) > 3)
+	// {
+	// 	if (!(content(st->a) == st->min) && !(content(st->a) == st->max))
+	// 		_ft_presort(st);
+	// 	else
+	// 		ft_ra(st);
+	// }
+}
+
 void	ft_sortn(t_state *st)
 {
 	int	idx;
 
-	while (ft_lstsize(st->a) > 3)
-	{
-		if (!(content(st->a) == st->min) && !(content(st->a) == st->max))
-			ft_presort(st);
-		else
-			do_op(st, RA);
-	}
+	ft_presort(st);
 	ft_sort3(st);
 	while (st->b)
 	{
