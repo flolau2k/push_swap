@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   radix.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flauer <flauer@student.42.fr>              +#+  +:+       +#+        */
+/*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 11:22:43 by flauer            #+#    #+#             */
-/*   Updated: 2023/05/04 16:25:52 by flauer           ###   ########.fr       */
+/*   Updated: 2023/05/07 22:33:48 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	ft_radix(t_state *st)
 		sort.i = 0;
 		while(sort.i < sort.len)
 		{
-			if (!((id(st->a) / sort.factor) % 2))
+			if (!((get_id(st->a) / sort.factor) % 2))
 				do_op(st, PB);
 			else
 				do_op(st, RA);

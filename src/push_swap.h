@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flauer <flauer@student.42.fr>              +#+  +:+       +#+        */
+/*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 11:56:01 by flauer            #+#    #+#             */
-/*   Updated: 2023/05/05 11:39:28 by flauer           ###   ########.fr       */
+/*   Updated: 2023/05/07 22:33:48 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ typedef struct s_elm
 {
 	int	*content;
 	int	id;
+	int	nsteps;
 }	t_elm;
 
 typedef struct s_sort
@@ -77,7 +78,7 @@ bool	init(int argc, char *argv[], t_state *st);
 bool	init_stack(int argc, char *args[], t_state *st);
 void	free_stacks(t_state *st);
 int		content(t_list *elm);
-int		id(t_list *elm);
+int		get_id(t_list *elm);
 bool	sorted(t_state *st);
 
 // operations.c
@@ -112,6 +113,11 @@ void	ft_putstate(t_state *st);
 int	ft_min(t_list *lst);
 int	ft_max(t_list *lst);
 int	content(t_list *elm);
+int	opt_rot(t_list *lst, int i);
+int	get_pos(t_list *lst, t_list *elm);
+int	get_pos_id(t_list *lst, int i);
+int	nsteps(t_list *elm);
+int	ft_abs(int i);
 
 // init.c
 bool	init_stack(int argc, char *args[], t_state *st);

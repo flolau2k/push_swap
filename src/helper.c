@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   helper.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flauer <flauer@student.42.fr>              +#+  +:+       +#+        */
+/*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/27 09:58:49 by flauer            #+#    #+#             */
-/*   Updated: 2023/05/04 13:55:19 by flauer           ###   ########.fr       */
+/*   Updated: 2023/05/07 22:34:56 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ft_putelm(void	*content)
 {
-	ft_printf("%d ", *(int *)((t_elm *)content)->content);
+	ft_printf("%d	", *((t_elm *)content)->content);
 }
 
 void	ft_putid(void *content)
@@ -22,7 +22,63 @@ void	ft_putid(void *content)
 	t_elm	*elm;
 
 	elm = content;
-	ft_printf("%d ", elm->id);
+	ft_printf("%d	", elm->id);
+}
+
+void	ft_putnsteps(void *content)
+{
+	t_elm	*elm;
+
+	elm = content;
+	ft_printf("%d	", elm->nsteps);
+}
+
+int	get_pos(t_list *lst, t_list *elm)
+{
+	int	ret;
+	t_list *curr_elm;
+
+	ret = 0;
+	curr_elm = lst;
+	while (curr_elm && get_id(curr_elm) != get_id(elm))
+	{
+		curr_elm = curr_elm->next;
+		++ret;
+	}
+	return (opt_rot(lst, ret));
+}
+
+int	get_pos_id(t_list *lst, int id)
+{
+	int	ret;
+
+	ret = 0;
+	while (lst && get_id(lst) != id)
+	{
+		lst = lst->next;
+		++ret;
+	}
+	return (opt_rot(lst, ret));
+}
+
+int	opt_rot(t_list *lst, int i)
+{
+	int	ret;
+	int	len;
+	
+	len = ft_lstsize(lst);
+	if (i <= len / 2)
+		return (i);
+	else
+		return (i - len);
+}
+
+int	ft_abs(int i)
+{
+	if (i < 0)
+		return (-i);
+	else
+		return (i);
 }
 
 void	ft_putlst(t_list *lst)
@@ -30,6 +86,8 @@ void	ft_putlst(t_list *lst)
 	ft_lstiter(lst, &ft_putelm);
 	ft_printf("\n");
 	ft_lstiter(lst, &ft_putid);
+	ft_printf("\n");
+	ft_lstiter(lst, &ft_putnsteps);
 }
 
 void	ft_putstate(t_state *st)
@@ -37,8 +95,8 @@ void	ft_putstate(t_state *st)
 	ft_printf("stack a: \n");
 	ft_putlst(st->a);
 	ft_printf("\n");
-	// ft_printf("stack b: ");
-	// ft_putlst(st->b);
+	ft_printf("stack b: \n");
+	ft_putlst(st->b);
 	ft_printf("\n --------- \n");
 }
 
@@ -63,9 +121,14 @@ int	content(t_list *elm)
 	return (*((t_elm *)elm->content)->content);
 }
 
-int	id(t_list *elm)
+int	get_id(t_list *elm)
 {
 	return (((t_elm *)elm->content)->id);
+}
+
+int	nsteps(t_list *elm)
+{
+	return (((t_elm *)elm->content)->nsteps);
 }
 
 int	ft_max(t_list *lst)

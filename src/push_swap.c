@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flauer <flauer@student.42.fr>              +#+  +:+       +#+        */
+/*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 11:55:50 by flauer            #+#    #+#             */
-/*   Updated: 2023/05/05 16:49:02 by flauer           ###   ########.fr       */
+/*   Updated: 2023/05/07 22:58:22 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,7 @@ void	ft_sort3(t_state *st)
 
 /// @brief find the insert position for the element src into list dst at the 
 /// correct location. expect dst to be sorted already, but may be rotated.
+/// also dst must already contain its smallest and largest element.
 /// @param dst destination list
 /// @param src source element
 /// @return position to insert; number of rotate operations respectively. 
@@ -150,7 +151,12 @@ int	ft_ins(t_state *st)
 	return (_ft_ins(st->a, st->b));
 }
 
-bool	same_chunk(t_state *st, int i, int j)
+/// @brief check if both IDs are in the same chunk.
+/// @param st 
+/// @param i 
+/// @param j 
+/// @return true if in the same chunk, otherwise false.
+int	same_chunk(t_state *st, int i, int j)
 {
 	int	chunk;
 	int	chunk_size;
@@ -174,8 +180,9 @@ bool	same_chunk(t_state *st, int i, int j)
 
 /// @brief work with IDs! TODO: look for the next cheapest operation. use the chunk_len to see, if in
 /// the range of + or - chunk_len another item of the same chunk is. maybe use double linked lists?
+/// TODO: make sure, to insert a new chunk at the correct position!
 /// @param st 
-int	sort_in_chunks(t_state *st)
+int	get_num_chunk_rotations(t_state *st, t_list *elm)
 {
 	int		i;
 	int		len;
@@ -184,20 +191,20 @@ int	sort_in_chunks(t_state *st)
 
 	tmp = st->b;
 	i = 0;
-	src_id = id(st->a);
+	src_id = get_id(elm);
 	len = ft_lstsize(tmp);
 	while (tmp)
 	{
-		if (same_chunk(st, id(tmp), src_id))
+		if (same_chunk(st, get_id(tmp), src_id))
 			break ;
 		tmp = tmp->next;
 		++i;
 	}
-	if (i < len / 2)
+	if (i <= len / 2)
 		return (i);
 	else
 	{
-		while (tmp && same_chunk(st, id(tmp), src_id))
+		while (tmp && same_chunk(st, get_id(tmp), src_id))
 		{
 			++i;
 			tmp = tmp->next;
@@ -221,20 +228,20 @@ int	chunk_len(t_state *st)
 	ret = 0;
 	i = 0;
 	temp = st->b;
-	src_id = id(temp);
+	src_id = get_id(temp);
 	len = ft_lstsize(temp);
-	while (temp && same_chunk(st, src_id, id(temp)))
+	while (temp && same_chunk(st, src_id, get_id(temp)))
 	{
 		++i;
 		temp = temp->next;
 	}
 	ret = i;
-	while (temp && !same_chunk(st, src_id, id(temp)))
+	while (temp && !same_chunk(st, src_id, get_id(temp)))
 	{
 		++i;
 		temp = temp->next;
 	}
-	if (temp && same_chunk(st, src_id, id(temp)) && len - i < ret)
+	if (temp && same_chunk(st, src_id, get_id(temp)) && len - i < ret)
 		return (i - len);
 	return ret;
 }
@@ -254,13 +261,13 @@ void	best_rot(t_state *st, char lst_id, int c)
 		ft_rrotn(st, len - c, lst_id);
 }
 
-void	_ft_presort(t_state *st)
+void	pb_chunk(t_state *st)
 {
 	int	pos;
 
 	if (ft_lstsize(st->b) == 0)
 		return (ft_pb(st));
-	pos = sort_in_chunks(st);
+	pos = get_num_chunk_rotations(st, st->a);
 	if (pos == 0)
 		return (ft_pb(st));
 	else if (pos > 0)
@@ -269,49 +276,97 @@ void	_ft_presort(t_state *st)
 		return (ft_rrotn(st, -pos, 'b'), ft_pb(st));
 }
 
-int	rot_a_cheapest(t_state *st)
-{
-	int		chs;
-	int		ret;
-	int		i;
-	t_list	*tmp;
+// int	rot_a_cheapest(t_state *st)
+// {
+// 	int		chs;
+// 	int		ret;
+// 	int		i;
+// 	t_list	*tmp;
 
-	chs = chunk_len(st);
-	ret = 0;
-	i = 0;
-	tmp = st->a;
-	while (tmp && !same_chunk(st, id(tmp), id(st->b)))
+// 	chs = chunk_len(st);
+// 	ret = 0;
+// 	i = 0;
+// 	tmp = st->a;
+// 	while (tmp && !same_chunk(st, id(tmp), id(st->b)))
+// 	{
+// 		if (ret == chs)
+// 			break;
+// 		++ret;
+// 		tmp = tmp->next;
+// 	}
+// 	tmp = ft_lstlast(st->a);
+// 	while (tmp && !same_chunk(st, id(tmp), id(st->b)))
+// 	{
+// 		if (i == chs)
+// 			break ;
+// 		++i;
+// 		tmp = tmp->prev;
+// 	}
+// 	return ()
+// }
+
+/// @brief set nsteps for all elements in stack a. TODO: ft_lstiter()?
+/// @param st state
+void	get_push_steps(t_state *st)
+{
+	t_list	*curr_elm;
+	int		rots;
+
+	curr_elm = st->a;
+	while (curr_elm)
 	{
-		if (ret == chs)
-			break;
-		++ret;
-		tmp = tmp->next;
+		rots = get_num_chunk_rotations(st, curr_elm);
+		rots += ft_abs(get_pos(st->a, curr_elm));
+		if (get_id(curr_elm) == 0 || get_id(curr_elm) == st->len - 1)
+			rots = 99999;
+		((t_elm *)curr_elm->content)->nsteps = rots;
+		curr_elm = curr_elm->next;
 	}
-	tmp = ft_lstlast(st->a);
-	while (tmp && !same_chunk(st, id(tmp), id(st->b)))
+}
+
+/// @brief rotate to element with id 
+/// @param st 
+/// @param n 
+void	ft_rot_a_to_pos(t_state *st, int id)
+{
+	int	rot;
+
+	rot = opt_rot(st->a, get_pos_id(st->a, id));
+	if (rot > 0)
+		return (ft_rotn(st, rot, 'a'));
+	if (rot < 0)
+		return (ft_rrotn(st, -rot, 'a'));
+}
+
+void	find_cheapest(t_state *st)
+{
+	int		cheapest;
+	int		ret;
+	t_list *curr_elm;
+
+	cheapest = nsteps(st->a);
+	ret = get_id(st->a);
+	curr_elm = st->a;
+	while (curr_elm)
 	{
-		if (i == chs)
-			break ;
-		++i;
-		tmp = tmp->prev;
+		if (nsteps(curr_elm) < cheapest)
+		{
+			cheapest = nsteps(curr_elm);
+			ret = get_id(curr_elm);
+		}
+		curr_elm = curr_elm->next;
 	}
-	return ()
+	ft_rot_a_to_pos(st, ret);
 }
 
 void	ft_presort(t_state *st)
 {
 	while (ft_lstsize(st->a) > 3)
 	{
-		push_cheapest(st);
+		get_push_steps(st);
+		find_cheapest(st);
+		pb_chunk(st);
 	}
-
-	// while (ft_lstsize(st->a) > 3)
-	// {
-	// 	if (!(content(st->a) == st->min) && !(content(st->a) == st->max))
-	// 		_ft_presort(st);
-	// 	else
-	// 		ft_ra(st);
-	// }
 }
 
 void	ft_sortn(t_state *st)
@@ -340,6 +395,8 @@ int	main(int argc, char *argv[])
 		return (0);
 	if (!init(argc, argv, &st))
 		return (write(1, "Error\n", 6));
+	// ft_putstate(&st);
 	ft_sortn(&st);
+	//ft_putstate(&st);
 	return (0);
 }

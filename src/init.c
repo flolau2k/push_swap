@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flauer <flauer@student.42.fr>              +#+  +:+       +#+        */
+/*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/28 14:04:14 by flauer            #+#    #+#             */
-/*   Updated: 2023/05/05 14:54:44 by flauer           ###   ########.fr       */
+/*   Updated: 2023/05/07 23:36:46 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ void	find_sectors(t_state *st)
 	st->high = lst[(i/3)*2];
 	st->mid = lst[i/2];
 	fill_ids(st, &lst);
-	st->num_chunks = 6;
+	st->num_chunks = 5;
 }
 
 t_elm	*new_elm(int *content)
@@ -117,6 +117,7 @@ t_elm	*new_elm(int *content)
 		return (NULL);
 	ret->content = content;
 	ret->id = 0;
+	ret->nsteps = 0;
 	return ret;
 }
 
