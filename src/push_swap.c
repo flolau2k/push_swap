@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 11:55:50 by flauer            #+#    #+#             */
-/*   Updated: 2023/05/08 13:11:02 by flauer           ###   ########.fr       */
+/*   Updated: 2023/05/08 13:15:42 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -257,8 +257,6 @@ void	get_pa_steps(t_state *st)
 		nra = _ft_ins(st->a, curr_elm);
 		if ((nra >= 0 && nrb >= 0) || (nra < 0 && nrb < 0))
 			nra = ft_abs(ft_abs(nra) - ft_abs(nrb));
-		if (get_id(curr_elm) == 0 || get_id(curr_elm) == st->len - 1)
-			nra = 999999;
 		((t_elm *)curr_elm->content)->nsteps = nra;
 		curr_elm = curr_elm->next;
 	}
@@ -293,7 +291,7 @@ void	rot_for_pb(t_state *st, t_list *elm)
 	int	nra;
 	int	nrb;
 
-	nra = get_pos_id(st->a, get_id(elm));
+	nra = get_pos(st->a, elm);
 	nrb = get_chunk_pos(st, elm);
 	_rot_combined(st, nra, nrb);
 }
