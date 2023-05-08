@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 11:55:50 by flauer            #+#    #+#             */
-/*   Updated: 2023/05/08 09:32:34 by flauer           ###   ########.fr       */
+/*   Updated: 2023/05/08 09:40:48 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -267,8 +267,6 @@ void	pb_chunk(t_state *st)
 
 	if (ft_lstsize(st->b) == 0)
 		return (ft_pb(st));
-	if (get_id(st->a) == 0 || get_id(st->a) == st->len - 1)
-		ft_printf("attempting to push min or max...\n");
 	pos = get_num_chunk_rotations(st, st->a);
 	if (pos == 0)
 		return (ft_pb(st));
@@ -330,8 +328,6 @@ void	find_cheapest(t_state *st)
 		curr_elm = curr_elm->next;
 	}
 	ft_rot_a_to_pos(st, ret);
-	if (get_id(st->a) == 0 || get_id(st->a) == st->len - 1)
-		ft_printf("look here... \n");
 }
 
 void	ft_presort(t_state *st)
