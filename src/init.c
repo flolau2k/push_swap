@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/28 14:04:14 by flauer            #+#    #+#             */
-/*   Updated: 2023/05/08 12:08:25 by flauer           ###   ########.fr       */
+/*   Updated: 2023/05/08 13:19:56 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,19 +118,6 @@ t_elm	*new_elm(int *content)
 	return ret;
 }
 
-// void	max_min(t_state *st, int curr_val, int i)
-// {
-// 	if (i == 0)
-// 	{
-// 		st->min = curr_val;
-// 		st->max = st->min;
-// 	}
-// 	if (curr_val < st->min)
-// 		st->min = curr_val;
-// 	else if (curr_val > st->max)
-// 		st->max = curr_val;
-// }
-
 bool	init_stack(int argc, char *args[], t_state *st)
 {
 	int			i;
@@ -143,7 +130,6 @@ bool	init_stack(int argc, char *args[], t_state *st)
 	while (i < argc)
 	{
 		curr_elm = new_elm(ft_atoi(args[i]));
-		// max_min(st, *curr_elm->content, i);
 		if (!curr_elm || check[(unsigned int) *curr_elm->content])
 			return (false);
 		check[(unsigned int) *curr_elm->content] = true;
