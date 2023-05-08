@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 11:55:50 by flauer            #+#    #+#             */
-/*   Updated: 2023/05/08 13:00:00 by flauer           ###   ########.fr       */
+/*   Updated: 2023/05/08 13:11:02 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -242,6 +242,28 @@ void	get_pb_steps(t_state *st)
 	}
 }
 
+/// @brief set nsteps for all elements in stack a. TODO: ft_lstiter()?
+/// @param st state
+void	get_pa_steps(t_state *st)
+{
+	t_list	*curr_elm;
+	int		nra;
+	int		nrb;
+
+	curr_elm = st->b;
+	while (curr_elm)
+	{
+		nrb = get_pos(st->b, curr_elm);
+		nra = _ft_ins(st->a, curr_elm);
+		if ((nra >= 0 && nrb >= 0) || (nra < 0 && nrb < 0))
+			nra = ft_abs(ft_abs(nra) - ft_abs(nrb));
+		if (get_id(curr_elm) == 0 || get_id(curr_elm) == st->len - 1)
+			nra = 999999;
+		((t_elm *)curr_elm->content)->nsteps = nra;
+		curr_elm = curr_elm->next;
+	}
+}
+
 void	_rot_combined(t_state *st, int nra, int nrb)
 {
 	while (nra > 0 && nrb > 0)
@@ -266,7 +288,7 @@ void	_rot_combined(t_state *st, int nra, int nrb)
 		ft_rrotn(st, -nrb, 'b');
 }
 
-void	ft_rot_to_pos(t_state *st, t_list *elm)
+void	rot_for_pb(t_state *st, t_list *elm)
 {
 	int	nra;
 	int	nrb;
@@ -274,6 +296,37 @@ void	ft_rot_to_pos(t_state *st, t_list *elm)
 	nra = get_pos_id(st->a, get_id(elm));
 	nrb = get_chunk_pos(st, elm);
 	_rot_combined(st, nra, nrb);
+}
+
+void	rot_for_pa(t_state *st, t_list *elm)
+{
+	int	nra;
+	int	nrb;
+
+	nrb = get_pos(st->b, elm);
+	nra = _ft_ins(st->a, elm);
+	_rot_combined(st, nra, nrb);
+}
+
+void	find_min_pa(t_state *st)
+{
+	int		cheapest;
+	t_list	*ret;
+	t_list	*curr_elm;
+
+	cheapest = nsteps(st->b);
+	ret = st->b;
+	curr_elm = st->b;
+	while (curr_elm)
+	{
+		if (nsteps(curr_elm) >= 0 && nsteps(curr_elm) < cheapest)
+		{
+			cheapest = nsteps(curr_elm);
+			ret = curr_elm;
+		}
+		curr_elm = curr_elm->next;
+	}
+	rot_for_pa(st, ret);
 }
 
 void	find_min_pb(t_state *st)
@@ -294,7 +347,7 @@ void	find_min_pb(t_state *st)
 		}
 		curr_elm = curr_elm->next;
 	}
-	ft_rot_to_pos(st, ret);
+	rot_for_pb(st, ret);
 }
 
 void	ft_presort(t_state *st)
@@ -316,11 +369,7 @@ void	ft_sortn(t_state *st)
 	while (st->b)
 	{
 		get_pa_steps(st);
-		idx = ft_ins(st);
-		if (idx > 0)
-			ft_rotn(st, idx, 'a');
-		else if (idx < 0)
-			ft_rrotn(st, -idx, 'a');
+		find_min_pa(st);
 		ft_pa(st);
 	}
 	ft_rotate(st);
