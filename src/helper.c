@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/27 09:58:49 by flauer            #+#    #+#             */
-/*   Updated: 2023/05/08 09:31:54 by flauer           ###   ########.fr       */
+/*   Updated: 2023/05/08 10:29:46 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,22 +22,6 @@ void	ft_putelm(void	*content)
 	ft_printf("%d	", elm->id);
 	ft_printf("%d	", elm->nsteps);
 	ft_printf("\n");
-}
-
-void	ft_putid(void *content)
-{
-	t_elm	*elm;
-
-	elm = content;
-	ft_printf("%d	", elm->id);
-}
-
-void	ft_putnsteps(void *content)
-{
-	t_elm	*elm;
-
-	elm = content;
-	ft_printf("%d	", elm->nsteps);
 }
 
 int	get_pos(t_list *lst, t_list *elm)
@@ -94,9 +78,6 @@ void	ft_putlst(t_list *lst)
 {
 	ft_lstiter(lst, &ft_putelm);
 	ft_printf("\n");
-	// ft_lstiter(lst, &ft_putid);
-	// ft_printf("\n");
-	// ft_lstiter(lst, &ft_putnsteps);
 }
 
 void	ft_putstate(t_state *st)
