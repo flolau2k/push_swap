@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/28 14:04:14 by flauer            #+#    #+#             */
-/*   Updated: 2023/05/08 11:27:15 by flauer           ###   ########.fr       */
+/*   Updated: 2023/05/08 12:08:25 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,9 +101,6 @@ void	find_sectors(t_state *st)
 		tmp = tmp->next;
 	}
 	pre_quicksort(&lst, 0, i - 1);
-	st->low = lst[i/3];
-	st->high = lst[(i/3)*2];
-	st->mid = lst[i/2];
 	fill_ids(st, &lst);
 	st->num_chunks = 3;
 }
@@ -121,18 +118,18 @@ t_elm	*new_elm(int *content)
 	return ret;
 }
 
-void	max_min(t_state *st, int curr_val, int i)
-{
-	if (i == 0)
-	{
-		st->min = curr_val;
-		st->max = st->min;
-	}
-	if (curr_val < st->min)
-		st->min = curr_val;
-	else if (curr_val > st->max)
-		st->max = curr_val;
-}
+// void	max_min(t_state *st, int curr_val, int i)
+// {
+// 	if (i == 0)
+// 	{
+// 		st->min = curr_val;
+// 		st->max = st->min;
+// 	}
+// 	if (curr_val < st->min)
+// 		st->min = curr_val;
+// 	else if (curr_val > st->max)
+// 		st->max = curr_val;
+// }
 
 bool	init_stack(int argc, char *args[], t_state *st)
 {
@@ -146,7 +143,7 @@ bool	init_stack(int argc, char *args[], t_state *st)
 	while (i < argc)
 	{
 		curr_elm = new_elm(ft_atoi(args[i]));
-		max_min(st, *curr_elm->content, i);
+		// max_min(st, *curr_elm->content, i);
 		if (!curr_elm || check[(unsigned int) *curr_elm->content])
 			return (false);
 		check[(unsigned int) *curr_elm->content] = true;

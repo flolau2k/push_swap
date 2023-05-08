@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 11:56:01 by flauer            #+#    #+#             */
-/*   Updated: 2023/05/07 22:33:48 by flauer           ###   ########.fr       */
+/*   Updated: 2023/05/08 12:08:06 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,19 +35,9 @@ typedef struct s_state
 {
 	t_list	*a;
 	t_list	*b;
-	int		max;
-	int		min;
-	int		low;
-	int		mid;
-	int		high;
 	int		len;
 	int		num_chunks;
 }	t_state;
-
-// typedef struct s_data
-// {
-
-// }	t_data;
 
 typedef struct s_elm
 {
@@ -63,15 +53,6 @@ typedef struct s_sort
 	int	len;
 	int	i;
 }	t_sort;
-
-typedef struct s_ins
-{
-	t_list	*tmp;
-	int		len;
-	int		i;
-	int		ret;
-	int		thres;
-}	t_ins;
 
 int		main(int argc, char *argv[]);
 bool	init(int argc, char *argv[], t_state *st);

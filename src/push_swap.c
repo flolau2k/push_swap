@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 11:55:50 by flauer            #+#    #+#             */
-/*   Updated: 2023/05/08 11:26:52 by flauer           ###   ########.fr       */
+/*   Updated: 2023/05/08 12:02:19 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,26 +120,21 @@ void	ft_sort3(t_state *st)
 /// if return is < 0, reverse rotation is needed, else normal rotation.
 int	_ft_ins(t_list *dst, t_list *src)
 {
-	t_ins	ins;
+	t_list	*tmp;
+	int		i;
 
-	ins.len = ft_lstsize(dst);
-	ins.tmp = dst;
-	ins.i = 0;
-	ins.ret = 0;
-	ins.thres = content(src);
-	if (content(dst) > content(src) && content(ft_lstlast(dst)) < content(src))
-		return (ins.i);
-	while (ins.tmp->next)
+	tmp = dst;
+	i = 0;
+	if (get_id(dst) > get_id(src) && get_id(ft_lstlast(dst)) < get_id(src))
+		return (i);
+	while (tmp->next)
 	{
-		++ins.i;
-		if (content(ins.tmp) < ins.thres && content(ins.tmp->next) > ins.thres)
+		++i;
+		if (get_id(tmp) < get_id(src) && get_id(tmp->next) > get_id(src))
 			break ;
-		ins.tmp = ins.tmp->next;
+		tmp = tmp->next;
 	}
-	if (ins.i <= ins.len / 2)
-		return (ins.i);
-	else
-		return (ins.i - ins.len);
+	return (opt_rot(dst, i));
 }
 
 /// @brief find the correct location for the top of b to insert in a.
@@ -281,7 +276,7 @@ void	ft_rot_to_pos(t_state *st, t_list *elm)
 	_rot_combined(st, nra, nrb);
 }
 
-void	find_cheapest(t_state *st)
+void	find_cheapest_to_b(t_state *st)
 {
 	int		cheapest;
 	t_list	*ret;
@@ -307,7 +302,7 @@ void	ft_presort(t_state *st)
 	while (ft_lstsize(st->a) > 3)
 	{
 		get_push_steps(st);
-		find_cheapest(st);
+		find_cheapest_to_b(st);
 		ft_pb(st);
 	}
 }
@@ -318,6 +313,7 @@ void	ft_sortn(t_state *st)
 
 	ft_presort(st);
 	ft_sort3(st);
+	
 	while (st->b)
 	{
 		idx = ft_ins(st);
