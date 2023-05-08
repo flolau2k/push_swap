@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/28 14:04:14 by flauer            #+#    #+#             */
-/*   Updated: 2023/05/07 23:36:46 by flauer           ###   ########.fr       */
+/*   Updated: 2023/05/08 09:35:47 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ void	find_sectors(t_state *st)
 	st->high = lst[(i/3)*2];
 	st->mid = lst[i/2];
 	fill_ids(st, &lst);
-	st->num_chunks = 5;
+	st->num_chunks = 11;
 }
 
 t_elm	*new_elm(int *content)

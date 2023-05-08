@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 11:55:50 by flauer            #+#    #+#             */
-/*   Updated: 2023/05/07 22:58:22 by flauer           ###   ########.fr       */
+/*   Updated: 2023/05/08 09:32:34 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -267,6 +267,8 @@ void	pb_chunk(t_state *st)
 
 	if (ft_lstsize(st->b) == 0)
 		return (ft_pb(st));
+	if (get_id(st->a) == 0 || get_id(st->a) == st->len - 1)
+		ft_printf("attempting to push min or max...\n");
 	pos = get_num_chunk_rotations(st, st->a);
 	if (pos == 0)
 		return (ft_pb(st));
@@ -275,35 +277,6 @@ void	pb_chunk(t_state *st)
 	else
 		return (ft_rrotn(st, -pos, 'b'), ft_pb(st));
 }
-
-// int	rot_a_cheapest(t_state *st)
-// {
-// 	int		chs;
-// 	int		ret;
-// 	int		i;
-// 	t_list	*tmp;
-
-// 	chs = chunk_len(st);
-// 	ret = 0;
-// 	i = 0;
-// 	tmp = st->a;
-// 	while (tmp && !same_chunk(st, id(tmp), id(st->b)))
-// 	{
-// 		if (ret == chs)
-// 			break;
-// 		++ret;
-// 		tmp = tmp->next;
-// 	}
-// 	tmp = ft_lstlast(st->a);
-// 	while (tmp && !same_chunk(st, id(tmp), id(st->b)))
-// 	{
-// 		if (i == chs)
-// 			break ;
-// 		++i;
-// 		tmp = tmp->prev;
-// 	}
-// 	return ()
-// }
 
 /// @brief set nsteps for all elements in stack a. TODO: ft_lstiter()?
 /// @param st state
@@ -315,10 +288,10 @@ void	get_push_steps(t_state *st)
 	curr_elm = st->a;
 	while (curr_elm)
 	{
-		rots = get_num_chunk_rotations(st, curr_elm);
+		rots = ft_abs(get_num_chunk_rotations(st, curr_elm));
 		rots += ft_abs(get_pos(st->a, curr_elm));
 		if (get_id(curr_elm) == 0 || get_id(curr_elm) == st->len - 1)
-			rots = 99999;
+			rots = 999999;
 		((t_elm *)curr_elm->content)->nsteps = rots;
 		curr_elm = curr_elm->next;
 	}
@@ -331,7 +304,7 @@ void	ft_rot_a_to_pos(t_state *st, int id)
 {
 	int	rot;
 
-	rot = opt_rot(st->a, get_pos_id(st->a, id));
+	rot = get_pos_id(st->a, id);
 	if (rot > 0)
 		return (ft_rotn(st, rot, 'a'));
 	if (rot < 0)
@@ -342,14 +315,14 @@ void	find_cheapest(t_state *st)
 {
 	int		cheapest;
 	int		ret;
-	t_list *curr_elm;
+	t_list	*curr_elm;
 
 	cheapest = nsteps(st->a);
 	ret = get_id(st->a);
 	curr_elm = st->a;
 	while (curr_elm)
 	{
-		if (nsteps(curr_elm) < cheapest)
+		if (nsteps(curr_elm) >= 0 && nsteps(curr_elm) < cheapest)
 		{
 			cheapest = nsteps(curr_elm);
 			ret = get_id(curr_elm);
@@ -357,6 +330,8 @@ void	find_cheapest(t_state *st)
 		curr_elm = curr_elm->next;
 	}
 	ft_rot_a_to_pos(st, ret);
+	if (get_id(st->a) == 0 || get_id(st->a) == st->len - 1)
+		ft_printf("look here... \n");
 }
 
 void	ft_presort(t_state *st)
