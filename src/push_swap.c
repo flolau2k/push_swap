@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 11:55:50 by flauer            #+#    #+#             */
-/*   Updated: 2023/05/08 12:02:19 by flauer           ###   ########.fr       */
+/*   Updated: 2023/05/08 13:00:00 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -191,7 +191,7 @@ int	same_chunk(t_state *st, t_list *i, t_list *j)
 /// the range of + or - chunk_len another item of the same chunk is. maybe use double linked lists?
 /// TODO: make sure, to insert a new chunk at the correct position!
 /// @param st 
-int	get_num_chunk_rotations(t_state *st, t_list *elm)
+int	get_chunk_pos(t_state *st, t_list *elm)
 {
 	int		i;
 	int		len;
@@ -222,7 +222,7 @@ int	get_num_chunk_rotations(t_state *st, t_list *elm)
 
 /// @brief set nsteps for all elements in stack a. TODO: ft_lstiter()?
 /// @param st state
-void	get_push_steps(t_state *st)
+void	get_pb_steps(t_state *st)
 {
 	t_list	*curr_elm;
 	int		nra;
@@ -231,7 +231,7 @@ void	get_push_steps(t_state *st)
 	curr_elm = st->a;
 	while (curr_elm)
 	{
-		nrb = get_num_chunk_rotations(st, curr_elm);
+		nrb = get_chunk_pos(st, curr_elm);
 		nra = get_pos(st->a, curr_elm);
 		if ((nra >= 0 && nrb >= 0) || (nra < 0 && nrb < 0))
 			nra = ft_abs(ft_abs(nra) - ft_abs(nrb));
@@ -272,11 +272,11 @@ void	ft_rot_to_pos(t_state *st, t_list *elm)
 	int	nrb;
 
 	nra = get_pos_id(st->a, get_id(elm));
-	nrb = get_num_chunk_rotations(st, elm);
+	nrb = get_chunk_pos(st, elm);
 	_rot_combined(st, nra, nrb);
 }
 
-void	find_cheapest_to_b(t_state *st)
+void	find_min_pb(t_state *st)
 {
 	int		cheapest;
 	t_list	*ret;
@@ -301,8 +301,8 @@ void	ft_presort(t_state *st)
 {
 	while (ft_lstsize(st->a) > 3)
 	{
-		get_push_steps(st);
-		find_cheapest_to_b(st);
+		get_pb_steps(st);
+		find_min_pb(st);
 		ft_pb(st);
 	}
 }
@@ -313,9 +313,9 @@ void	ft_sortn(t_state *st)
 
 	ft_presort(st);
 	ft_sort3(st);
-	
 	while (st->b)
 	{
+		get_pa_steps(st);
 		idx = ft_ins(st);
 		if (idx > 0)
 			ft_rotn(st, idx, 'a');
