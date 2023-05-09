@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 11:56:01 by flauer            #+#    #+#             */
-/*   Updated: 2023/05/08 12:08:06 by flauer           ###   ########.fr       */
+/*   Updated: 2023/05/09 12:01:59 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,29 +41,17 @@ typedef struct s_state
 
 typedef struct s_elm
 {
-	int	*content;
+	int	content;
 	int	id;
 	int	nsteps;
 }	t_elm;
 
-typedef struct s_sort
-{
-	int	max;
-	int	factor;
-	int	len;
-	int	i;
-}	t_sort;
 
 int		main(int argc, char *argv[]);
 bool	init(int argc, char *argv[], t_state *st);
-bool	init_stack(int argc, char *args[], t_state *st);
-void	free_stacks(t_state *st);
 int		content(t_list *elm);
 int		get_id(t_list *elm);
 bool	sorted(t_state *st);
-
-// operations.c
-void	do_op(t_state *st, int op);
 
 // swap.c
 void	ft_sa(t_state *st);
@@ -86,28 +74,23 @@ void	ft_rrb(t_state *st);
 void	ft_rrr(t_state *st);
 
 // helper.c
-void	ft_putelm(void	*content);
-void	ft_putlst(t_list *lst);
+int		opt_rot(t_list *lst, int i);
+int		get_pos(t_list *lst, t_list *elm);
+int		get_pos_id(t_list *lst, int i);
+size_t	ft_abs(int i);
 int		ft_alen(const char **a);
-void	clear_elm(void *content);
-void	ft_putstate(t_state *st);
-int	ft_min(t_list *lst);
-int	ft_max(t_list *lst);
-int	content(t_list *elm);
-int	opt_rot(t_list *lst, int i);
-int	get_pos(t_list *lst, t_list *elm);
-int	get_pos_id(t_list *lst, int i);
-int	nsteps(t_list *elm);
-int	ft_abs(int i);
 
 // init.c
-bool	init_stack(int argc, char *args[], t_state *st);
-void	free_stacks(t_state *st);
 bool	init(int argc, char *argv[], t_state *st);
 
-void	ft_radix(t_state *st);
+// presort.c
+void	pre_quicksort(int **lst, int l, int r);
+void	fill_ids(t_state *st, int **lst);
 
-// test.c
-void	test_ops(t_state *st);
+// element.c
+int		content(t_list *elm);
+int		get_id(t_list *elm);
+int		nsteps(t_list *elm);
+t_elm	*new_elm(int content);
 
 #endif // PUSH_SWAP_H
