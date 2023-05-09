@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 11:19:17 by flauer            #+#    #+#             */
-/*   Updated: 2023/04/30 15:37:06 by flauer           ###   ########.fr       */
+/*   Updated: 2023/05/09 13:01:23 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 /// @param lst the Stack to rotate
 static void	ft_rot(t_list **lst)
 {
-	t_list *temp;
+	t_list	*temp;
 
 	if (!*lst || ft_lstsize(*lst) < 2)
 		return ;

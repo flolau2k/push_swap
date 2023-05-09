@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 12:40:07 by flauer            #+#    #+#             */
-/*   Updated: 2023/05/09 12:40:33 by flauer           ###   ########.fr       */
+/*   Updated: 2023/05/09 13:00:05 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 bool	sorted(t_state *st)
 {
-	t_list *tmp;
+	t_list	*tmp;
 
 	if (ft_lstsize(st->b) > 0)
 		return (false);
@@ -60,7 +60,7 @@ void	ft_rotate(t_state *st)
 {
 	int		len;
 	t_list	*lst;
-	int 	pos;
+	int		pos;
 
 	if (sorted(st))
 		return ;

@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 10:42:34 by flauer            #+#    #+#             */
-/*   Updated: 2023/05/09 10:50:08 by flauer           ###   ########.fr       */
+/*   Updated: 2023/05/09 12:59:51 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,6 @@ void	pre_quicksort(int **lst, int l, int r)
 		pre_quicksort(lst, pivot + 1, r);
 	}
 }
-
 
 static void	add_id(t_list *a, int val, int id)
 {

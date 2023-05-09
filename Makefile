@@ -6,7 +6,7 @@
 #    By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/21 11:55:35 by flauer            #+#    #+#              #
-#    Updated: 2023/05/09 12:41:16 by flauer           ###   ########.fr        #
+#    Updated: 2023/05/09 12:57:51 by flauer           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,8 @@ OBJDIR = obj/
 SRCDIR = src/
 
 SRCS =	push_swap.c helper.c swap.c push.c rot.c rev_rot.c init.c optimizers.c \
-		presort.c element.c rotation_helper.c chunk_helper.c sort.c
+		presort.c element.c rotation_helper.c chunk_helper.c sort.c \
+		insertion_helper.c
 
 OBJS = $(SRCS:%.c=%.o)
 

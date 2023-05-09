@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 11:56:01 by flauer            #+#    #+#             */
-/*   Updated: 2023/05/09 12:41:10 by flauer           ###   ########.fr       */
+/*   Updated: 2023/05/09 13:01:16 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,19 +17,6 @@
 # ifdef __linux
 #  include <stdint.h>
 # endif
-
-# define SA		1
-# define SB		2
-# define SS		3
-# define PA		4
-# define PB		5
-# define RA		6
-# define RB		7
-# define RR		8
-# define RRA	9
-# define RRB	10
-# define RRR	11
-# define FLUSH	12
 
 typedef struct s_state
 {
@@ -46,12 +33,7 @@ typedef struct s_elm
 	int	nsteps;
 }	t_elm;
 
-
 int		main(int argc, char *argv[]);
-bool	init(int argc, char *argv[], t_state *st);
-int		content(t_list *elm);
-int		get_id(t_list *elm);
-bool	sorted(t_state *st);
 
 // swap.c
 void	ft_sa(t_state *st);
@@ -110,7 +92,6 @@ int		get_chunk_pos(t_state *st, t_list *elm);
 // rotation_helper.c
 void	rot_for_pb(t_state *st, t_list *elm);
 void	rot_for_pa(t_state *st, t_list *elm);
-int		_ft_ins(t_list *dst, t_list *src);
 void	ft_rotn(t_state *st, int n, char lst);
 void	ft_rrotn(t_state *st, int n, char lst);
 
@@ -120,5 +101,8 @@ void	ft_sort3(t_state *st);
 void	ft_rotate(t_state *st);
 int		rotated(t_list	*lst);
 bool	sorted(t_state *st);
+
+// insertion_helper.c
+int		_ft_ins(t_list *dst, t_list *src);
 
 #endif // PUSH_SWAP_H

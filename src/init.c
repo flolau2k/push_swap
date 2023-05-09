@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/28 14:04:14 by flauer            #+#    #+#             */
-/*   Updated: 2023/05/09 11:59:53 by flauer           ###   ########.fr       */
+/*   Updated: 2023/05/09 12:59:04 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static bool	init_stack(int argc, char *args[], t_state *st)
 	st->b = NULL;
 	while (i < argc)
 	{
-		if(ft_strlen(args[i]) > 10)
+		if (ft_strlen(args[i]) > 10)
 			return (false);
 		curr_elm = new_elm(ft_atoi(args[i]));
 		if (curr_elm->content > INT32_MAX || curr_elm->content < INT32_MIN)

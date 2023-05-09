@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 11:22:43 by flauer            #+#    #+#             */
-/*   Updated: 2023/05/07 22:33:48 by flauer           ###   ########.fr       */
+/*   Updated: 2023/05/09 13:00:20 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	ft_radix(t_state *st)
 	while (!sorted(st) && sort.factor <= sort.len)
 	{
 		sort.i = 0;
-		while(sort.i < sort.len)
+		while (sort.i < sort.len)
 		{
 			if (!((get_id(st->a) / sort.factor) % 2))
 				do_op(st, PB);
@@ -29,7 +29,7 @@ void	ft_radix(t_state *st)
 				do_op(st, RA);
 			++sort.i;
 		}
-		while(st->b)
+		while (st->b)
 			do_op(st, PA);
 		sort.factor *= 2;
 	}

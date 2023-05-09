@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 11:58:47 by flauer            #+#    #+#             */
-/*   Updated: 2023/05/09 12:00:16 by flauer           ###   ########.fr       */
+/*   Updated: 2023/05/09 13:00:52 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,5 +37,5 @@ t_elm	*new_elm(int content)
 	ret->content = content;
 	ret->id = 0;
 	ret->nsteps = 0;
-	return ret;
+	return (ret);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   swap.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flauer <flauer@student.42.fr>              +#+  +:+       +#+        */
+/*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 12:14:18 by flauer            #+#    #+#             */
-/*   Updated: 2023/05/04 11:29:18 by flauer           ###   ########.fr       */
+/*   Updated: 2023/05/09 13:00:31 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,4 +42,3 @@ void	ft_ss(t_state *st)
 	ft_swap(&st->b);
 	ft_printf("ss\n");
 }
-

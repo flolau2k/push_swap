@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rev_rot.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flauer <flauer@student.42.fr>              +#+  +:+       +#+        */
+/*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/28 13:23:07 by flauer            #+#    #+#             */
-/*   Updated: 2023/05/05 12:11:58 by flauer           ###   ########.fr       */
+/*   Updated: 2023/05/09 12:59:36 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ t_list	*ft_seclast(t_list *lst)
 /// @param lst the Stack to rotate
 static void	ft_rrot(t_list **lst)
 {
-	t_list *temp;
+	t_list	*temp;
 
 	temp = ft_lstlast(*lst);
 	ft_seclast(*lst)->next = NULL;
@@ -49,6 +49,7 @@ void	ft_rrb(t_state *st)
 	ft_rrot(&st->b);
 	ft_printf("rrb\n");
 }
+
 /// @brief rra and rrb at the same time
 /// @param st state struct
 void	ft_rrr(t_state *st)
