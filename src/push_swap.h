@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 11:56:01 by flauer            #+#    #+#             */
-/*   Updated: 2023/05/09 12:01:59 by flauer           ###   ########.fr       */
+/*   Updated: 2023/05/09 12:41:10 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,5 +92,33 @@ int		content(t_list *elm);
 int		get_id(t_list *elm);
 int		nsteps(t_list *elm);
 t_elm	*new_elm(int content);
+
+// optimizers.c
+void	get_pa_steps(t_state *st);
+void	get_pb_steps(t_state *st);
+size_t	get_steps_combined(int nra, int nrb);
+void	find_min_pb(t_state *st);
+void	find_min_pa(t_state *st);
+
+// chunk_helper.c
+int		get_chunk_id(t_state *st, int id);
+int		get_chunk(t_state *st, t_list *elm);
+int		same_chunk_id(t_state *st, int i, int j);
+int		same_chunk(t_state *st, t_list *i, t_list *j);
+int		get_chunk_pos(t_state *st, t_list *elm);
+
+// rotation_helper.c
+void	rot_for_pb(t_state *st, t_list *elm);
+void	rot_for_pa(t_state *st, t_list *elm);
+int		_ft_ins(t_list *dst, t_list *src);
+void	ft_rotn(t_state *st, int n, char lst);
+void	ft_rrotn(t_state *st, int n, char lst);
+
+// sort.c
+void	ft_sortn(t_state *st);
+void	ft_sort3(t_state *st);
+void	ft_rotate(t_state *st);
+int		rotated(t_list	*lst);
+bool	sorted(t_state *st);
 
 #endif // PUSH_SWAP_H

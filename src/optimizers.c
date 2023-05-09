@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 13:58:33 by flauer            #+#    #+#             */
-/*   Updated: 2023/05/09 10:59:25 by flauer           ###   ########.fr       */
+/*   Updated: 2023/05/09 12:41:56 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,6 @@ size_t	get_steps_combined(int nra, int nrb)
 		return (ft_abs(nra) + ft_abs(nrb));
 }
 
-/// @brief set nsteps for all elements in stack a.
-/// @param st state
 void	get_pb_steps(t_state *st)
 {
 	t_list	*curr_elm;
@@ -89,8 +87,6 @@ void	get_pb_steps(t_state *st)
 	}
 }
 
-/// @brief set nsteps for all elements in stack a.
-/// @param st state
 void	get_pa_steps(t_state *st)
 {
 	t_list	*curr_elm;

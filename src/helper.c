@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/27 09:58:49 by flauer            #+#    #+#             */
-/*   Updated: 2023/05/09 11:59:12 by flauer           ###   ########.fr       */
+/*   Updated: 2023/05/09 12:27:06 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ int	get_pos_id(t_list *lst, int id)
 
 int	opt_rot(t_list *lst, int i)
 {
-	int	ret;
 	int	len;
 	
 	len = ft_lstsize(lst);
