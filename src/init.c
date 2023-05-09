@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/28 14:04:14 by flauer            #+#    #+#             */
-/*   Updated: 2023/05/09 13:56:36 by flauer           ###   ########.fr       */
+/*   Updated: 2023/05/09 17:03:32 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static void	presort(t_state *st)
 	st->num_chunks = 3;
 }
 
-static bool	init_stack(int argc, char *args[], t_state *st)
+bool	init_stack(int argc, char *args[], t_state *st)
 {
 	int			i;
 	t_elm		*curr_elm;
@@ -57,8 +57,17 @@ static bool	init_stack(int argc, char *args[], t_state *st)
 		++i;
 	}
 	st->len = argc;
-	presort(st);
 	return (true);
+}
+
+int	ft_alen(const char **a)
+{
+	int	i;
+
+	i = 0;
+	while (a[i])
+		++i;
+	return (i);
 }
 
 bool	init(int argc, char *argv[], t_state *st)
@@ -69,8 +78,16 @@ bool	init(int argc, char *argv[], t_state *st)
 	{
 		args = ft_split(argv[1], ' ');
 		argc = ft_alen((const char **)args);
-		return (init_stack(argc, args, st));
+		if (!init_stack(argc, args, st))
+			return (false);
+		presort(st);
+		return (true);
 	}
 	else
-		return (init_stack(argc - 1, argv + 1, st));
+	{
+		if (!init_stack(argc - 1, argv + 1, st))
+			return (false);
+		presort(st);
+		return (true);
+	}
 }

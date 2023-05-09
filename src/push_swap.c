@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
+/*   By: flauer <flauer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 11:55:50 by flauer            #+#    #+#             */
-/*   Updated: 2023/05/09 12:41:35 by flauer           ###   ########.fr       */
+/*   Updated: 2023/05/09 16:51:22 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	main(int argc, char *argv[])
 	if (argc < 2)
 		return (0);
 	if (!init(argc, argv, &st))
-		return (write(1, "Error\n", 6));
+		return (write(STDERR_FILENO, "Error\n", 6));
 	ft_sortn(&st);
 	return (0);
 }

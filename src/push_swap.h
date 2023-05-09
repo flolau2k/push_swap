@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
+/*   By: flauer <flauer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 11:56:01 by flauer            #+#    #+#             */
-/*   Updated: 2023/05/09 13:01:16 by flauer           ###   ########.fr       */
+/*   Updated: 2023/05/09 17:03:55 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,10 +60,11 @@ int		opt_rot(t_list *lst, int i);
 int		get_pos(t_list *lst, t_list *elm);
 int		get_pos_id(t_list *lst, int i);
 size_t	ft_abs(int i);
-int		ft_alen(const char **a);
 
 // init.c
 bool	init(int argc, char *argv[], t_state *st);
+bool	init_stack(int argc, char *args[], t_state *st);
+int		ft_alen(const char **a);
 
 // presort.c
 void	pre_quicksort(int **lst, int l, int r);
@@ -100,9 +101,11 @@ void	ft_sortn(t_state *st);
 void	ft_sort3(t_state *st);
 void	ft_rotate(t_state *st);
 int		rotated(t_list	*lst);
-bool	sorted(t_state *st);
 
 // insertion_helper.c
 int		_ft_ins(t_list *dst, t_list *src);
+
+// checks.c
+bool	sorted(t_state *st);
 
 #endif // PUSH_SWAP_H

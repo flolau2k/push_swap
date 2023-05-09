@@ -6,35 +6,48 @@
 #    By: flauer <flauer@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/21 11:55:35 by flauer            #+#    #+#              #
-#    Updated: 2023/05/09 13:45:37 by flauer           ###   ########.fr        #
+#    Updated: 2023/05/09 17:04:21 by flauer           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = push_swap
+NAME =				push_swap
+BONUS_NAME =		checker
 
-CC = gcc
-CFLAGS = -g -Wall -Werror -Wextra
+CC =				gcc
+CFLAGS =			-g -Wall -Werror -Wextra
 
-LIBFT_DIR = libft
+LIBFT_DIR =			libft
 
-OBJDIR = obj/
-SRCDIR = src/
+OBJDIR =			obj/
+SRCDIR =			src/
 
-SRCS =	push_swap.c helper.c swap.c push.c rot.c rev_rot.c init.c optimizers.c \
-		presort.c element.c rotation_helper.c chunk_helper.c sort.c \
-		insertion_helper.c
+SRCS_SORT =			rotation_helper.c chunk_helper.c insertion_helper.c \
+					optimizers.c sort.c helper.c
+SRCS_INIT =			init.c element.c push.c rev_rot.c rot.c swap.c checks.c presort.c
+SRCS_BONUS =		checker.c
+SRCS_MANDATORY =	push_swap.c
 
-OBJS = $(SRCS:%.c=%.o)
+OBJS_SORT =			$(SRCS_SORT:%.c=%.o)
+OBJS_INIT =			$(SRCS_INIT:%.c=%.o)
+OBJS_BONUS =		$(SRCS_BONUS:%.c=%.o)
+OBJS_MANDATORY =	$(SRCS_MANDATORY:%.c=%.o)
 
-SRC = $(addprefix $(SRCDIR), $(SRCS))
-OBJ = $(addprefix $(OBJDIR), $(OBJS))
+SRC_SORT =			$(addprefix $(SRCDIR), $(SRCS_SORT))
+SRC_STACK =			$(addprefix $(SRCDIR), $(SRCS_INIT))
+SRC_BONUS =			$(addprefix $(SRCDIR), $(SRCS_BONUS))
+SRC_MANDATORY =		$(addprefix $(SRCDIR), $(SRCS_MANDATORY))
 
-.PHONY = ft all clean fclean re 
+OBJ_MANDATORY =		$(addprefix $(OBJDIR), $(OBJS_MANDATORY))
+OBJ_SORT =			$(addprefix $(OBJDIR), $(OBJS_SORT))
+OBJ_INIT =			$(addprefix $(OBJDIR), $(OBJS_INIT))
+OBJ_BONUS =			$(addprefix $(OBJDIR), $(OBJS_BONUS))
+
+.PHONY =			ft all clean fclean re bonus
 
 all: ft $(NAME)
 
-$(NAME): $(OBJ)
-	gcc -o $(NAME) $(OBJ) -Llibft -lft
+$(NAME): $(OBJ_MANDATORY) $(OBJ_SORT) $(OBJ_INIT)
+	$(CC) $(CFLAGS) -o $(NAME) $(OBJ_MANDATORY) $(OBJ_SORT) $(OBJ_INIT) -Llibft -lft
 	@echo "built $(NAME)"
 
 $(OBJDIR)%.o: $(SRCDIR)%.c
@@ -43,7 +56,7 @@ $(OBJDIR)%.o: $(SRCDIR)%.c
 
 clean:
 	make -C $(LIBFT_DIR) clean
-	/bin/rm -rf $(OBJ)
+	/bin/rm -rf $(OBJDIR)
 
 fclean: clean
 	make -C $(LIBFT_DIR) fclean
@@ -53,3 +66,7 @@ re:	fclean all
 
 ft:
 	@make -C $(LIBFT_DIR)
+
+bonus: ft $(OBJ_INIT) $(OBJ_BONUS)
+	$(CC) $(CFLAGS) -o $(BONUS_NAME) $(OBJ_INIT) $(OBJ_BONUS) -Llibft -lft
+	@echo "built $(BONUS_NAME)"

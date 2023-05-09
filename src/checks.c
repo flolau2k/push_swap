@@ -1,37 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push.c                                             :+:      :+:    :+:   */
+/*   checks.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: flauer <flauer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/28 13:10:18 by flauer            #+#    #+#             */
-/*   Updated: 2023/05/09 16:35:23 by flauer           ###   ########.fr       */
+/*   Created: 2023/05/09 16:08:22 by flauer            #+#    #+#             */
+/*   Updated: 2023/05/09 16:35:58 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	ft_pa(t_state *st)
+bool	sorted(t_state *st)
 {
-	t_list	*temp;
+	t_list	*tmp;
 
-	if (ft_lstsize(st->b) < 1)
-		return ;
-	temp = st->b;
-	st->b = st->b->next;
-	ft_lstadd_front(&st->a, temp);
-	ft_printf("pa\n");
-}
-
-void	ft_pb(t_state *st)
-{
-	t_list	*temp;
-
-	if (ft_lstsize(st->a) < 1)
-		return ;
-	temp = st->a;
-	st->a = st->a->next;
-	ft_lstadd_front(&st->b, temp);
-	ft_printf("pb\n");
+	if (ft_lstsize(st->b) > 0)
+		return (false);
+	tmp = st->a;
+	while (tmp->next)
+	{
+		if (content(tmp) > content(tmp->next))
+			return (false);
+		tmp = tmp->next;
+	}
+	return (true);
 }

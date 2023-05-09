@@ -3,30 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   sort.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
+/*   By: flauer <flauer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 12:40:07 by flauer            #+#    #+#             */
-/*   Updated: 2023/05/09 13:00:05 by flauer           ###   ########.fr       */
+/*   Updated: 2023/05/09 16:35:35 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-bool	sorted(t_state *st)
-{
-	t_list	*tmp;
-
-	if (ft_lstsize(st->b) > 0)
-		return (false);
-	tmp = st->a;
-	while (tmp->next)
-	{
-		if (content(tmp) > content(tmp->next))
-			return (false);
-		tmp = tmp->next;
-	}
-	return (true);
-}
 
 int	rotated(t_list	*lst)
 {

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   helper.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
+/*   By: flauer <flauer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/27 09:58:49 by flauer            #+#    #+#             */
-/*   Updated: 2023/05/09 12:58:52 by flauer           ###   ########.fr       */
+/*   Updated: 2023/05/09 17:03:22 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,14 +59,4 @@ size_t	ft_abs(int i)
 		return (-i);
 	else
 		return (i);
-}
-
-int	ft_alen(const char **a)
-{
-	int	i;
-
-	i = 0;
-	while (a[i])
-		++i;
-	return (i);
 }
