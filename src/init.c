@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/28 14:04:14 by flauer            #+#    #+#             */
-/*   Updated: 2023/05/09 17:03:32 by flauer           ###   ########.fr       */
+/*   Updated: 2023/05/09 17:23:40 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,26 @@ static void	presort(t_state *st)
 	st->num_chunks = 3;
 }
 
+static bool	check_arg(char *arg)
+{
+	int	i;
+
+	if (!arg)
+		return(false);
+	if (arg[0] != '+' && arg[0] != '-' && !ft_isdigit(arg[0]))
+		return (false);
+	i = 1;
+	while (arg[i])
+	{
+		if (!ft_isdigit(arg[i]))
+			return (false);
+		if (i > 11)
+			return (false);
+		++i;
+	}
+	return (true);
+}
+
 bool	init_stack(int argc, char *args[], t_state *st)
 {
 	int			i;
@@ -44,7 +64,7 @@ bool	init_stack(int argc, char *args[], t_state *st)
 	st->b = NULL;
 	while (i < argc)
 	{
-		if (ft_strlen(args[i]) > 11)
+		if (!check_arg(args[i]))
 			return (false);
 		new = ft_atoi(args[i]);
 		if (new > INT32_MAX || new < INT32_MIN)

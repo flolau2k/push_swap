@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 11:56:01 by flauer            #+#    #+#             */
-/*   Updated: 2023/05/09 17:03:55 by flauer           ###   ########.fr       */
+/*   Updated: 2023/05/09 17:49:46 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,15 +36,18 @@ typedef struct s_elm
 int		main(int argc, char *argv[]);
 
 // swap.c
+void	ft_swap(t_list **lst);
 void	ft_sa(t_state *st);
 void	ft_sb(t_state *st);
 void	ft_ss(t_state *st);
 
 // push.c
+void	ft_push(t_list *dst, t_list *src);
 void	ft_pa(t_state *st);
 void	ft_pb(t_state *st);
 
 // rot.c
+void	ft_rot(t_list **lst);
 void	ft_ra(t_state *st);
 void	ft_rb(t_state *st);
 void	ft_rr(t_state *st);

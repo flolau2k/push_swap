@@ -6,13 +6,13 @@
 /*   By: flauer <flauer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 12:14:18 by flauer            #+#    #+#             */
-/*   Updated: 2023/05/09 16:35:39 by flauer           ###   ########.fr       */
+/*   Updated: 2023/05/09 17:30:58 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static void	ft_swap(t_list **lst)
+void	ft_swap(t_list **lst)
 {
 	t_list	*temp;
 

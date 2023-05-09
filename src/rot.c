@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 11:19:17 by flauer            #+#    #+#             */
-/*   Updated: 2023/05/09 16:35:29 by flauer           ###   ########.fr       */
+/*   Updated: 2023/05/09 17:31:27 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 /// @brief (rotate lst): Shift up all elements of stack a by 1.
 /// The first element becomes the last one.
 /// @param lst the Stack to rotate
-static void	ft_rot(t_list **lst)
+void	ft_rot(t_list **lst)
 {
 	t_list	*temp;
 
