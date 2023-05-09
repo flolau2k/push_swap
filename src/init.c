@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
+/*   By: flauer <flauer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/28 14:04:14 by flauer            #+#    #+#             */
-/*   Updated: 2023/05/09 12:59:04 by flauer           ###   ########.fr       */
+/*   Updated: 2023/05/09 13:56:36 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,17 +37,19 @@ static bool	init_stack(int argc, char *args[], t_state *st)
 	int			i;
 	t_elm		*curr_elm;
 	static bool	check[UINT32_MAX];
+	long		new;
 
 	i = 0;
 	st->a = NULL;
 	st->b = NULL;
 	while (i < argc)
 	{
-		if (ft_strlen(args[i]) > 10)
+		if (ft_strlen(args[i]) > 11)
 			return (false);
-		curr_elm = new_elm(ft_atoi(args[i]));
-		if (curr_elm->content > INT32_MAX || curr_elm->content < INT32_MIN)
+		new = ft_atoi(args[i]);
+		if (new > INT32_MAX || new < INT32_MIN)
 			return (false);
+		curr_elm = new_elm(new);
 		if (!curr_elm || check[(unsigned int) curr_elm->content])
 			return (false);
 		check[(unsigned int) curr_elm->content] = true;
