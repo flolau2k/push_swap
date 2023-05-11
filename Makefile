@@ -6,7 +6,7 @@
 #    By: flauer <flauer@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/21 11:55:35 by flauer            #+#    #+#              #
-#    Updated: 2023/05/11 10:15:50 by flauer           ###   ########.fr        #
+#    Updated: 2023/05/11 10:39:51 by flauer           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,11 +43,9 @@ OBJ_SORT =			$(addprefix $(OBJDIR), $(OBJS_SORT))
 OBJ_INIT =			$(addprefix $(OBJDIR), $(OBJS_INIT))
 OBJ_BONUS =			$(addprefix $(OBJDIR), $(OBJS_BONUS))
 
-.PHONY =			ft all clean fclean re bonus
-
 all: ft $(NAME)
 
-$(NAME): $(OBJ_MANDATORY) $(OBJ_SORT) $(OBJ_INIT)
+$(NAME): ft $(OBJ_MANDATORY) $(OBJ_SORT) $(OBJ_INIT)
 	$(CC) $(CFLAGS) -o $(NAME) $(OBJ_MANDATORY) $(OBJ_SORT) $(OBJ_INIT) -Llibft -lft
 	@echo "built $(NAME)"
 
@@ -68,6 +66,10 @@ re:	fclean all
 ft:
 	@make -C $(LIBFT_DIR)
 
-bonus: ft $(OBJ_INIT) $(OBJ_BONUS)
+bonus: ft $(BONUS_NAME)
+
+$(BONUS_NAME): ft $(OBJ_INIT) $(OBJ_BONUS)
 	$(CC) $(CFLAGS) -o $(BONUS_NAME) $(OBJ_INIT) $(OBJ_BONUS) -Llibft -lft
 	@echo "built $(BONUS_NAME)"
+
+.PHONY =			ft all clean fclean re bonus
