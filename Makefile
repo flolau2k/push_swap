@@ -6,7 +6,7 @@
 #    By: flauer <flauer@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/21 11:55:35 by flauer            #+#    #+#              #
-#    Updated: 2023/05/11 12:30:54 by flauer           ###   ########.fr        #
+#    Updated: 2023/05/11 12:39:25 by flauer           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,7 +45,7 @@ OBJ_BONUS =			$(addprefix $(OBJDIR), $(OBJS_BONUS))
 
 .PHONY =			ft all clean fclean re
 
-all: $(LIBFT) $(NAME)
+all: $(LIBFT) $(NAME) $(BONUS_NAME)
 
 $(NAME): $(LIBFT) $(OBJ_MANDATORY) $(OBJ_SORT) $(OBJ_INIT)
 	$(CC) $(CFLAGS) -o $(NAME) $(OBJ_MANDATORY) $(OBJ_SORT) $(OBJ_INIT) -Llibft -lft
