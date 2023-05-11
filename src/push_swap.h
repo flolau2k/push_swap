@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 11:56:01 by flauer            #+#    #+#             */
-/*   Updated: 2023/05/11 10:10:43 by flauer           ###   ########.fr       */
+/*   Updated: 2023/05/11 12:34:37 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,6 @@
 # define PUSH_SWAP_H
 # include <stdbool.h>
 # include "../libft/include/libft.h"
-# ifdef __linux
-#  include <stdint.h>
-# endif
 
 typedef struct s_state
 {
