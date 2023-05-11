@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/28 14:04:14 by flauer            #+#    #+#             */
-/*   Updated: 2023/05/09 17:23:40 by flauer           ###   ########.fr       */
+/*   Updated: 2023/05/11 09:41:03 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ bool	init_stack(int argc, char *args[], t_state *st)
 	int			i;
 	t_elm		*curr_elm;
 	static bool	check[UINT32_MAX];
-	long		new;
+	long long	new;
 
 	i = 0;
 	st->a = NULL;
