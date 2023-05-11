@@ -6,7 +6,7 @@
 #    By: flauer <flauer@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/21 11:55:35 by flauer            #+#    #+#              #
-#    Updated: 2023/05/09 17:04:21 by flauer           ###   ########.fr        #
+#    Updated: 2023/05/11 09:36:57 by flauer           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,8 @@ SRCDIR =			src/
 
 SRCS_SORT =			rotation_helper.c chunk_helper.c insertion_helper.c \
 					optimizers.c sort.c helper.c
-SRCS_INIT =			init.c element.c push.c rev_rot.c rot.c swap.c checks.c presort.c
+SRCS_INIT =			init.c element.c push.c rev_rot.c rot.c swap.c checks.c \
+					presort.c debug.c
 SRCS_BONUS =		checker.c
 SRCS_MANDATORY =	push_swap.c
 
