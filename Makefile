@@ -6,7 +6,7 @@
 #    By: flauer <flauer@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/21 11:55:35 by flauer            #+#    #+#              #
-#    Updated: 2023/05/11 10:59:35 by flauer           ###   ########.fr        #
+#    Updated: 2023/05/11 12:20:28 by flauer           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -61,7 +61,7 @@ clean:
 
 fclean: clean
 	make -C libft fclean
-	/bin/rm -rf $(NAME)
+	/bin/rm -rf $(NAME) $(BONUS_NAME)
 
 re:	fclean all
 
