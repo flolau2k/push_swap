@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/28 14:04:14 by flauer            #+#    #+#             */
-/*   Updated: 2023/05/11 09:41:03 by flauer           ###   ########.fr       */
+/*   Updated: 2023/05/11 12:29:53 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static bool	check_arg(char *arg)
 	int	i;
 
 	if (!arg)
-		return(false);
+		return (false);
 	if (arg[0] != '+' && arg[0] != '-' && !ft_isdigit(arg[0]))
 		return (false);
 	i = 1;

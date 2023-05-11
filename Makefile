@@ -6,7 +6,7 @@
 #    By: flauer <flauer@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/21 11:55:35 by flauer            #+#    #+#              #
-#    Updated: 2023/05/11 12:20:28 by flauer           ###   ########.fr        #
+#    Updated: 2023/05/11 12:25:04 by flauer           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME =				push_swap
 BONUS_NAME =		checker
 
 CC =				gcc
-CFLAGS =			-g -Wall -Werror -Wextra -fsanitize=address
+CFLAGS =			-g -Wall -Werror -Wextra
 
 LIBFT =				libft/libft.a
 

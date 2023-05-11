@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 09:35:04 by flauer            #+#    #+#             */
-/*   Updated: 2023/05/11 09:36:09 by flauer           ###   ########.fr       */
+/*   Updated: 2023/05/11 12:29:37 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ void	ft_putelm(void	*content)
 	t_elm	*elm;
 
 	elm = content;
-	
 	ft_printf("%d	", elm->content);
 	ft_printf("%d	", elm->id);
 	ft_printf("%d	", elm->nsteps);
