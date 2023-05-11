@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 11:56:01 by flauer            #+#    #+#             */
-/*   Updated: 2023/05/11 09:54:19 by flauer           ###   ########.fr       */
+/*   Updated: 2023/05/11 10:10:43 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,18 +42,19 @@ void	ft_sb(t_state *st);
 void	ft_ss(t_state *st);
 
 // push.c
-void	ft_push(t_list **dst, t_list **src);
+void	_push(t_list **dst, t_list **src);
 void	ft_pa(t_state *st);
 void	ft_pb(t_state *st);
 
 // rot.c
-void	ft_rot(t_list **lst);
+void	_rot(t_list **lst);
 void	ft_ra(t_state *st);
 void	ft_rb(t_state *st);
 void	ft_rr(t_state *st);
 
 // rev_rot.c
 t_list	*ft_seclast(t_list *lst);
+void	_rrot(t_list **lst);
 void	ft_rra(t_state *st);
 void	ft_rrb(t_state *st);
 void	ft_rrr(t_state *st);

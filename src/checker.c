@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 15:23:52 by flauer            #+#    #+#             */
-/*   Updated: 2023/05/09 17:02:14 by flauer           ###   ########.fr       */
+/*   Updated: 2023/05/11 10:13:59 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,28 +14,28 @@
 
 static bool	handle_op(t_state *st, char *op)
 {
-	if (ft_strncmp(op, "sa\n", 3))
-		return (ft_sa(st), true);
-	else if (ft_strncmp(op, "sb\n", 3))
-		return (ft_sb(st), true);
-	else if (ft_strncmp(op, "ss\n", 3))
-		return (ft_ss(st), true);
-	else if (ft_strncmp(op, "pa\n", 3))
-		return (ft_pa(st), true);
-	else if (ft_strncmp(op, "pb\n", 3))
-		return (ft_pb(st), true);
-	else if (ft_strncmp(op, "ra\n", 3))
-		return (ft_ra(st), true);
-	else if (ft_strncmp(op, "rb\n", 3))
-		return (ft_rb(st), true);
-	else if (ft_strncmp(op, "rr\n", 3))
-		return (ft_rr(st), true);
-	else if (ft_strncmp(op, "rra\n", 3))
-		return (ft_rra(st), true);
-	else if (ft_strncmp(op, "rrb\n", 3))
-		return (ft_rrb(st), true);
-	else if (ft_strncmp(op, "rrr\n", 3))
-		return (ft_rrr(st), true);
+	if (!ft_strncmp(op, "sa\n", 3))
+		return (_swap(&st->a), true);
+	else if (!ft_strncmp(op, "sb\n", 3))
+		return (_swap(&st->b), true);
+	else if (!ft_strncmp(op, "ss\n", 3))
+		return (_swap(&st->a), _swap(&st->b), true);
+	else if (!ft_strncmp(op, "pa\n", 3))
+		return (_push(&st->a, &st->b), true);
+	else if (!ft_strncmp(op, "pb\n", 3))
+		return (_push(&st->b, &st->a), true);
+	else if (!ft_strncmp(op, "ra\n", 3))
+		return (_rot(&st->a), true);
+	else if (!ft_strncmp(op, "rb\n", 3))
+		return (_rot(&st->b), true);
+	else if (!ft_strncmp(op, "rr\n", 3))
+		return (_rot(&st->a), _rot(&st->b), true);
+	else if (!ft_strncmp(op, "rra\n", 3))
+		return (_rrot(&st->a), true);
+	else if (!ft_strncmp(op, "rrb\n", 3))
+		return (_rrot(&st->b), true);
+	else if (!ft_strncmp(op, "rrr\n", 3))
+		return (_rrot(&st->a), _rrot(&st->b), true);
 	return (false);
 }
 

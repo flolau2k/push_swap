@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 11:19:17 by flauer            #+#    #+#             */
-/*   Updated: 2023/05/09 17:31:27 by flauer           ###   ########.fr       */
+/*   Updated: 2023/05/11 10:12:11 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 /// @brief (rotate lst): Shift up all elements of stack a by 1.
 /// The first element becomes the last one.
 /// @param lst the Stack to rotate
-void	ft_rot(t_list **lst)
+void	_rot(t_list **lst)
 {
 	t_list	*temp;
 
@@ -32,7 +32,7 @@ void	ft_rot(t_list **lst)
 /// @param st state struct
 void	ft_ra(t_state *st)
 {
-	ft_rot(&st->a);
+	_rot(&st->a);
 	ft_printf("ra\n");
 }
 
@@ -41,7 +41,7 @@ void	ft_ra(t_state *st)
 /// @param st state struct
 void	ft_rb(t_state *st)
 {
-	ft_rot(&st->b);
+	_rot(&st->b);
 	ft_printf("rb\n");
 }
 
@@ -49,7 +49,7 @@ void	ft_rb(t_state *st)
 /// @param st state struct
 void	ft_rr(t_state *st)
 {
-	ft_rot(&st->a);
-	ft_rot(&st->b);
+	_rot(&st->a);
+	_rot(&st->b);
 	ft_printf("rr\n");
 }

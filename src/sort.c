@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 12:40:07 by flauer            #+#    #+#             */
-/*   Updated: 2023/05/09 16:35:35 by flauer           ###   ########.fr       */
+/*   Updated: 2023/05/11 10:32:18 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,10 @@ void	ft_sort3(t_state *st)
 
 void	ft_sortn(t_state *st)
 {
+	if (sorted(st))
+		return ;
+	if (ft_lstsize(st->b) == 0 && rotated(st->a) >= 0)
+		return (ft_rotate(st));
 	while (ft_lstsize(st->a) > 3)
 	{
 		get_pb_steps(st);
