@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: flauer <flauer@student.42.fr>              +#+  +:+       +#+         #
+#    By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/21 11:55:35 by flauer            #+#    #+#              #
-#    Updated: 2023/05/11 12:39:25 by flauer           ###   ########.fr        #
+#    Updated: 2023/05/12 09:05:47 by flauer           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,12 @@ NAME =				push_swap
 BONUS_NAME =		checker
 
 CC =				cc
-CFLAGS =			-g -Wall -Werror -Wextra
+UNAME = $(shell uname)
+ifeq ($(UNAME), Linux)
+	CFLAGS = -g -Wall -Wextra -Werror -mcmodel=large
+else ifeq ($(UNAME), Darwin)
+	CFLAGS = -g -Wall -Wextra -Werror
+endif
 
 LIBFT =				libft/libft.a
 
