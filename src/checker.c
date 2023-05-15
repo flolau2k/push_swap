@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   checker.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flauer <flauer@student.42.fr>              +#+  +:+       +#+        */
+/*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 15:23:52 by flauer            #+#    #+#             */
-/*   Updated: 2023/05/15 14:03:57 by flauer           ###   ########.fr       */
+/*   Updated: 2023/05/15 16:39:45 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static bool	init_bonus(int argc, char *argv[], t_state *st)
 		argc = ft_alen((const char **)args);
 		if (!init_stack(argc, args, st))
 			return (false);
-		/*free args*/
+		free_splits(args);
 		return (true);
 	}
 	else
@@ -81,6 +81,6 @@ int	main(int argc, char *argv[])
 		ft_printf("OK\n");
 	else
 		ft_printf("KO\n");
-	/*free stacks*/
+	clear_lists(&st);
 	return (0);
 }
