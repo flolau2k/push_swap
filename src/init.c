@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/28 14:04:14 by flauer            #+#    #+#             */
-/*   Updated: 2023/05/11 12:29:53 by flauer           ###   ########.fr       */
+/*   Updated: 2023/05/15 09:34:01 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static void	presort(t_state *st)
 	}
 	pre_quicksort(&lst, 0, i - 1);
 	fill_ids(st, &lst);
-	st->num_chunks = 3;
+	st->num_chunks = NUM_CHUNKS;
 }
 
 static bool	check_arg(char *arg)
