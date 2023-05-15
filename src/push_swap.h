@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 11:56:01 by flauer            #+#    #+#             */
-/*   Updated: 2023/05/15 09:35:58 by flauer           ###   ########.fr       */
+/*   Updated: 2023/05/15 11:44:55 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ int		opt_rot(t_list *lst, int i);
 int		get_pos(t_list *lst, t_list *elm);
 int		get_pos_id(t_list *lst, int i);
 size_t	ft_abs(int i);
+void	free_splits(char **splits);
 
 // init.c
 bool	init(int argc, char *argv[], t_state *st);
