@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/28 14:04:14 by flauer            #+#    #+#             */
-/*   Updated: 2023/05/15 11:45:22 by flauer           ###   ########.fr       */
+/*   Updated: 2023/05/15 15:38:15 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,16 +63,17 @@ bool	init_stack(int argc, char *args[], t_state *st)
 	i = 0;
 	st->a = NULL;
 	st->b = NULL;
+	curr_elm = NULL;
 	while (i < argc)
 	{
 		if (!check_arg(args[i]))
-			return (false);
+			return (clear_lists(st), false);
 		new = ft_atoi(args[i]);
 		if (new > INT32_MAX || new < INT32_MIN)
-			return (false);
+			return (clear_lists(st), false);
 		curr_elm = new_elm(new);
 		if (!curr_elm || check[(unsigned int) curr_elm->content])
-			return (false);
+			return (clear_lists(st), free(curr_elm), false);
 		check[(unsigned int) curr_elm->content] = true;
 		ft_lstadd_back(&st->a, ft_lstnew(curr_elm));
 		++i;

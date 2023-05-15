@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/27 09:58:49 by flauer            #+#    #+#             */
-/*   Updated: 2023/05/15 11:44:46 by flauer           ###   ########.fr       */
+/*   Updated: 2023/05/15 14:17:45 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,18 +59,4 @@ size_t	ft_abs(int i)
 		return (-i);
 	else
 		return (i);
-}
-
-void	free_splits(char **splits)
-{
-	int	i;
-
-	i = 0;
-	while (splits[i])
-	{
-		free(splits[i]);
-		i++;
-	}
-	free(splits);
-	splits = NULL;
 }

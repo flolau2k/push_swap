@@ -3,22 +3,23 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+         #
+#    By: flauer <flauer@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/21 11:55:35 by flauer            #+#    #+#              #
-#    Updated: 2023/05/12 09:05:47 by flauer           ###   ########.fr        #
+#    Updated: 2023/05/15 14:16:09 by flauer           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME =				push_swap
 BONUS_NAME =		checker
 
-CC =				cc
 UNAME = $(shell uname)
 ifeq ($(UNAME), Linux)
-	CFLAGS = -g -Wall -Wextra -Werror -mcmodel=large
+	CC =		gcc
+	CFLAGS =	-g -Wall -Wextra -Werror -mcmodel=large
 else ifeq ($(UNAME), Darwin)
-	CFLAGS = -g -Wall -Wextra -Werror
+	CC =		cc
+	CFLAGS =	-g -Wall -Wextra -Werror
 endif
 
 LIBFT =				libft/libft.a
@@ -29,7 +30,7 @@ SRCDIR =			src/
 SRCS_SORT =			rotation_helper.c chunk_helper.c insertion_helper.c \
 					optimizers.c sort.c helper.c
 SRCS_INIT =			init.c element.c push.c rev_rot.c rot.c swap.c checks.c \
-					presort.c debug.c
+					presort.c debug.c cleanup.c
 SRCS_BONUS =		checker.c
 SRCS_MANDATORY =	push_swap.c
 

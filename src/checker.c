@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 15:23:52 by flauer            #+#    #+#             */
-/*   Updated: 2023/05/11 10:13:59 by flauer           ###   ########.fr       */
+/*   Updated: 2023/05/15 14:03:57 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ static bool	init_bonus(int argc, char *argv[], t_state *st)
 		argc = ft_alen((const char **)args);
 		if (!init_stack(argc, args, st))
 			return (false);
+		/*free args*/
 		return (true);
 	}
 	else
@@ -73,10 +74,13 @@ int	main(int argc, char *argv[])
 	{
 		if (!handle_op(&st, nl))
 			return (write(STDERR_FILENO, "Error\n", 6));
+		free(nl);
 		nl = get_next_line(STDIN_FILENO);
 	}
 	if (sorted(&st))
-		return (ft_printf("OK\n"));
+		ft_printf("OK\n");
 	else
-		return (ft_printf("KO\n"));
+		ft_printf("KO\n");
+	/*free stacks*/
+	return (0);
 }

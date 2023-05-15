@@ -1,26 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.c                                        :+:      :+:    :+:   */
+/*   cleanup.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: flauer <flauer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/21 11:55:50 by flauer            #+#    #+#             */
-/*   Updated: 2023/05/15 14:20:14 by flauer           ###   ########.fr       */
+/*   Created: 2023/05/15 14:06:49 by flauer            #+#    #+#             */
+/*   Updated: 2023/05/15 15:32:12 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+# include "push_swap.h"
 
-int	main(int argc, char *argv[])
+void	clear_lists(t_state *st)
 {
-	t_state	st;
+	ft_lstclear(&st->a, &free);
+	ft_lstclear(&st->b, &free);
+}
 
-	if (argc < 2)
-		return (0);
-	if (!init(argc, argv, &st))
-		return (write(STDERR_FILENO, "Error\n", 6));
-	ft_sortn(&st);
-	clear_lists(&st);
-	return (0);
+void	free_splits(char **splits)
+{
+	int	i;
+
+	i = 0;
+	while (splits[i])
+	{
+		free(splits[i]);
+		i++;
+	}
+	free(splits);
+	splits = NULL;
+}
+
+void	cleanup_init(t_state *st, t_elm *elm)
+{
+	clear_lists(st);
+	if (elm != NULL)
+		free(elm);
 }
