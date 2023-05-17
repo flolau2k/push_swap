@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 11:56:01 by flauer            #+#    #+#             */
-/*   Updated: 2023/05/15 15:31:39 by flauer           ###   ########.fr       */
+/*   Updated: 2023/05/17 09:24:32 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ typedef struct s_state
 	t_list	*a;
 	t_list	*b;
 	int		len;
-	int		num_chunks;
 }	t_state;
 
 typedef struct s_elm

@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 12:30:49 by flauer            #+#    #+#             */
-/*   Updated: 2023/05/09 16:35:03 by flauer           ###   ########.fr       */
+/*   Updated: 2023/05/17 09:23:50 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ int	get_chunk_id(t_state *st, int id)
 	int	chunk_size;
 
 	chunk = 1;
-	chunk_size = st->len / st->num_chunks;
-	while (chunk < st->num_chunks)
+	chunk_size = st->len / NUM_CHUNKS;
+	while (chunk < NUM_CHUNKS)
 	{
 		if (id >= chunk_size * (chunk - 1) && id < chunk_size * chunk)
 			break ;
