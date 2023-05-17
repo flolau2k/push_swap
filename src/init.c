@@ -52,12 +52,21 @@ static bool	check_arg(char *arg)
 	return (true);
 }
 
+bool	check_dup(int val)
+{
+	static size_t	c;
+
+	if (c & (1 << (unsigned int)val))
+		return (true);
+	c |= 1 << (unsigned int)val;
+	return (false);
+}
+
 bool	init_stack(int argc, char *args[], t_state *st)
 {
-	int			i;
-	t_elm		*curr_elm;
-	static bool	check[UINT32_MAX];
-	long long	new;
+	int				i;
+	t_elm			*curr_elm;
+	long long		new;
 
 	i = 0;
 	st->a = NULL;
@@ -68,12 +77,11 @@ bool	init_stack(int argc, char *args[], t_state *st)
 		if (!check_arg(args[i]))
 			return (clear_lists(st), false);
 		new = ft_atoi(args[i]);
-		if (new > INT32_MAX || new < INT32_MIN)
+		if (new > INT32_MAX || new < INT32_MIN || check_dup(new))
 			return (clear_lists(st), false);
 		curr_elm = new_elm(new);
-		if (!curr_elm || check[(unsigned int) curr_elm->content])
-			return (clear_lists(st), free(curr_elm), false);
-		check[(unsigned int) curr_elm->content] = true;
+		if (!curr_elm)
+			return (clear_lists(st), false);
 		ft_lstadd_back(&st->a, ft_lstnew(curr_elm));
 		++i;
 	}
