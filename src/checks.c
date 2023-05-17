@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 16:08:22 by flauer            #+#    #+#             */
-/*   Updated: 2023/05/09 16:35:58 by flauer           ###   ########.fr       */
+/*   Updated: 2023/05/17 10:56:05 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,4 +26,14 @@ bool	sorted(t_state *st)
 		tmp = tmp->next;
 	}
 	return (true);
+}
+
+bool	check_dup(int val)
+{
+	static size_t	c;
+
+	if (c & (1 << (unsigned int)val))
+		return (true);
+	c |= 1 << (unsigned int)val;
+	return (false);
 }

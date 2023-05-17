@@ -6,11 +6,11 @@
 /*   By: flauer <flauer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/15 14:06:49 by flauer            #+#    #+#             */
-/*   Updated: 2023/05/15 15:32:12 by flauer           ###   ########.fr       */
+/*   Updated: 2023/05/17 11:21:07 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "push_swap.h"
+#include "push_swap.h"
 
 void	clear_lists(t_state *st)
 {
@@ -30,11 +30,4 @@ void	free_splits(char **splits)
 	}
 	free(splits);
 	splits = NULL;
-}
-
-void	cleanup_init(t_state *st, t_elm *elm)
-{
-	clear_lists(st);
-	if (elm != NULL)
-		free(elm);
 }

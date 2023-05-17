@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 11:56:01 by flauer            #+#    #+#             */
-/*   Updated: 2023/05/17 09:24:32 by flauer           ###   ########.fr       */
+/*   Updated: 2023/05/17 11:23:14 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ int		opt_rot(t_list *lst, int i);
 int		get_pos(t_list *lst, t_list *elm);
 int		get_pos_id(t_list *lst, int i);
 size_t	ft_abs(int i);
+int		_ft_ins(t_list *dst, t_list *src);
 
 // init.c
 bool	init(int argc, char *argv[], t_state *st);
@@ -105,16 +106,13 @@ void	ft_sort3(t_state *st);
 void	ft_rotate(t_state *st);
 int		rotated(t_list	*lst);
 
-// insertion_helper.c
-int		_ft_ins(t_list *dst, t_list *src);
-
 // checks.c
 bool	sorted(t_state *st);
+bool	check_dup(int val);
 
 // cleanup.c
 void	clear_lists(t_state *st);
 void	free_splits(char **splits);
-void	cleanup_init(t_state *st, t_elm *elm);
 
 // debug.c
 void	ft_putelm(void	*content);
