@@ -4,3 +4,4 @@ checker
 checker_Mac
 .vscode/
 vgcore*
+*.dSYM

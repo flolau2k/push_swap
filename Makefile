@@ -6,21 +6,15 @@
 #    By: flauer <flauer@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/21 11:55:35 by flauer            #+#    #+#              #
-#    Updated: 2023/05/15 14:16:09 by flauer           ###   ########.fr        #
+#    Updated: 2023/05/17 10:45:53 by flauer           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME =				push_swap
 BONUS_NAME =		checker
 
-UNAME = $(shell uname)
-ifeq ($(UNAME), Linux)
-	CC =		gcc
-	CFLAGS =	-g -Wall -Wextra -Werror -mcmodel=large
-else ifeq ($(UNAME), Darwin)
-	CC =		cc
-	CFLAGS =	-g -Wall -Wextra -Werror
-endif
+CC =				cc
+CFLAGS =			-g -Wall -Wextra -Werror
 
 LIBFT =				libft/libft.a
 
