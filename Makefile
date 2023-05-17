@@ -6,7 +6,7 @@
 #    By: flauer <flauer@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/21 11:55:35 by flauer            #+#    #+#              #
-#    Updated: 2023/05/17 11:23:03 by flauer           ###   ########.fr        #
+#    Updated: 2023/05/17 11:26:22 by flauer           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,18 +23,18 @@ SRCDIR =			src/
 
 SRCS_SORT =			rotation_helper.c chunk_helper.c optimizers.c \
 					sort.c helper.c
-SRCS_INIT =			init.c element.c push.c rev_rot.c rot.c swap.c checks.c \
-					presort.c debug.c cleanup.c
+SRCS_STACK =		init.c element.c push.c rev_rot.c rot.c swap.c checks.c \
+					presort.c cleanup.c
 SRCS_BONUS =		checker.c
 SRCS_MANDATORY =	push_swap.c
 
 OBJS_SORT =			$(SRCS_SORT:%.c=%.o)
-OBJS_INIT =			$(SRCS_INIT:%.c=%.o)
+OBJS_INIT =			$(SRCS_STACK:%.c=%.o)
 OBJS_BONUS =		$(SRCS_BONUS:%.c=%.o)
 OBJS_MANDATORY =	$(SRCS_MANDATORY:%.c=%.o)
 
 SRC_SORT =			$(addprefix $(SRCDIR), $(SRCS_SORT))
-SRC_STACK =			$(addprefix $(SRCDIR), $(SRCS_INIT))
+SRC_STACK =			$(addprefix $(SRCDIR), $(SRCS_STACK))
 SRC_BONUS =			$(addprefix $(SRCDIR), $(SRCS_BONUS))
 SRC_MANDATORY =		$(addprefix $(SRCDIR), $(SRCS_MANDATORY))
 

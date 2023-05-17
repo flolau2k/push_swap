@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 11:56:01 by flauer            #+#    #+#             */
-/*   Updated: 2023/05/17 11:23:14 by flauer           ###   ########.fr       */
+/*   Updated: 2023/05/17 11:42:24 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ typedef struct s_elm
 	int	nsteps;
 }	t_elm;
 
+// push_swap.c
 int		main(int argc, char *argv[]);
 
 // swap.c
@@ -108,15 +109,10 @@ int		rotated(t_list	*lst);
 
 // checks.c
 bool	sorted(t_state *st);
-bool	check_dup(int val);
+bool	check_dup(t_list *lst, int val);
 
 // cleanup.c
 void	clear_lists(t_state *st);
 void	free_splits(char **splits);
-
-// debug.c
-void	ft_putelm(void	*content);
-void	ft_putstate(t_state *st);
-void	ft_putlst(t_list *lst);
 
 #endif // PUSH_SWAP_H

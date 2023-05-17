@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/28 14:04:14 by flauer            #+#    #+#             */
-/*   Updated: 2023/05/17 10:55:01 by flauer           ###   ########.fr       */
+/*   Updated: 2023/05/17 11:43:31 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ bool	init_stack(int argc, char *args[], t_state *st)
 		if (!check_arg(args[i]))
 			return (clear_lists(st), false);
 		new = ft_atoi(args[i]);
-		if (new > INT32_MAX || new < INT32_MIN || check_dup(new))
+		if (new > INT32_MAX || new < INT32_MIN || check_dup(st->a, new))
 			return (clear_lists(st), false);
 		curr_elm = new_elm(new);
 		if (!curr_elm)
