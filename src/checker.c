@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   checker.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flauer <flauer@student.42heilbronn.de>     +#+  +:+       +#+        */
+/*   By: flauer <flauer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 15:23:52 by flauer            #+#    #+#             */
-/*   Updated: 2023/05/15 16:39:45 by flauer           ###   ########.fr       */
+/*   Updated: 2023/05/22 10:15:46 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,11 @@ int	main(int argc, char *argv[])
 	while (nl)
 	{
 		if (!handle_op(&st, nl))
+		{
+			clear_lists(&st);
+			free(nl);
 			return (write(STDERR_FILENO, "Error\n", 6));
+		}
 		free(nl);
 		nl = get_next_line(STDIN_FILENO);
 	}
