@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 15:23:52 by flauer            #+#    #+#             */
-/*   Updated: 2023/05/23 10:56:01 by flauer           ###   ########.fr       */
+/*   Updated: 2023/05/23 11:08:27 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,11 @@ static bool	handle_op(t_state *st, char *op)
 		return (_rot(&st->b), true);
 	else if (!ft_strncmp(op, "rr\n", 3))
 		return (_rot(&st->a), _rot(&st->b), true);
-	else if (!ft_strncmp(op, "rra\n", 3))
+	else if (!ft_strncmp(op, "rra\n", 4))
 		return (_rrot(&st->a), true);
-	else if (!ft_strncmp(op, "rrb\n", 3))
+	else if (!ft_strncmp(op, "rrb\n", 4))
 		return (_rrot(&st->b), true);
-	else if (!ft_strncmp(op, "rrr\n", 3))
+	else if (!ft_strncmp(op, "rrr\n", 4))
 		return (_rrot(&st->a), _rrot(&st->b), true);
 	return (false);
 }
