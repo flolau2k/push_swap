@@ -6,7 +6,7 @@
 /*   By: flauer <flauer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 15:23:52 by flauer            #+#    #+#             */
-/*   Updated: 2023/05/22 10:15:46 by flauer           ###   ########.fr       */
+/*   Updated: 2023/05/23 10:56:01 by flauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static bool	init_bonus(int argc, char *argv[], t_state *st)
 		args = ft_split(argv[1], ' ');
 		argc = ft_alen((const char **)args);
 		if (!init_stack(argc, args, st))
-			return (false);
+			return (free_splits(args), false);
 		free_splits(args);
 		return (true);
 	}
