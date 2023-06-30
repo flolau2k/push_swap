@@ -6,7 +6,7 @@
 #    By: flauer <flauer@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/21 11:55:35 by flauer            #+#    #+#              #
-#    Updated: 2023/05/17 11:26:22 by flauer           ###   ########.fr        #
+#    Updated: 2023/06/30 10:28:03 by flauer           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -66,7 +66,7 @@ fclean: clean
 re:	fclean all
 
 $(LIBFT):
-	@git submodule update --init --recursive --remote
+	@git submodule update --init --recursive
 	@make -C $(@D)
 
 bonus: $(LIBFT) $(BONUS_NAME)
